@@ -1,0 +1,1 @@
+curl -H "Content-Type: application/json" -X POST -d '{"username":"sdjoejf","email":"dhuie@dije.hdu"}' 0.0.0.0:5000/users/

@@ -25,14 +25,7 @@ SECRET_KEY = '@qqvutjqjbp0@ymb)8*$!y52p0#1o__-)1l-4-$)*11ka&1ln_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    # 'nginx',
-    # '0.0.0.0',
-    # 'users-service',
-    # 'users-db',
-    # 'web-service',
-    'localhost',
-]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -87,7 +80,7 @@ DATABASES = {
         'NAME': 'users_dev',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'users-db',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }

@@ -15,7 +15,7 @@ from . import views
 # ]
 
 urlpatterns = [
-    url(r'^$', views.get_all_users, name='users'),
-    url(r'^$', views.add_user, name='add_user'),
-    url(r'^(?P<pk>\d+)$', views.get_user, name='user'),
+    url(r'^$', views.users, name='users'),
+    url(r'^$', views.users, name='add_user'),
+    url(r'^(?P<pk>\d+)$', views.user, name='user'),
 ]

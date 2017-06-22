@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 @csrf_exempt
-def get_user(request, pk=0, *args, **kwargs):
+def user(request, pk=0, *args, **kwargs):
     data = {
         'users': [],
         'result': 'fail'
@@ -25,55 +25,57 @@ def get_user(request, pk=0, *args, **kwargs):
 
 
 @csrf_exempt
-def get_all_users(request, *args, **kwargs):
-    data = {
-        'users': [],
-        'result': 'fail'
-    }
-    try:
-        users = User.objects.all()
-        users = [model_to_dict(d) for d in users]
-        data['users'] = users
-        data['result'] = 'success'
-
-    except Exception as e:
-        return JsonResponse(data)
-    else:
-        pass
-    finally:
-        pass
-
-    return JsonResponse(data)
-
-
-@csrf_exempt
-def add_user(request, *args, **kwargs):
-    posted_data = request.body.decode('utf-8')
-    dict_obj = json.loads(posted_data)
-    existing_user = User.objects.filter(email=dict_obj['email'])
-
-    if existing_user:
+def users(request, *args, **kwargs):
+    if request.method == 'GET':
         data = {
-            'status': 'fail',
-            'message': '{email} already exists'.format(
+            'users': [],
+            'result': 'fail'
+        }
+        try:
+            users = User.objects.all()
+            users = [model_to_dict(d) for d in users]
+            data['users'] = users
+            data['result'] = 'success'
+
+        except Exception as e:
+            return JsonResponse(data)
+        else:
+            pass
+        finally:
+            pass
+
+        return JsonResponse(data)
+
+    else:
+
+        posted_data = request.body.decode('utf-8')
+        dict_obj = json.loads(posted_data)
+        # dict_obj = posted_data
+
+        existing_user = User.objects.filter(email=dict_obj['email'])
+
+        if existing_user:
+            data = {
+                'status': 'fail',
+                'message': '{email} already exists'.format(
+                    email=dict_obj['email']),
+            }
+            return JsonResponse(data)
+
+        user = User(**dict_obj)
+        user.save()
+        data = {
+            'status': 'success',
+            'message': '{email} added successfully !'.format(
                 email=dict_obj['email']),
         }
+
         return JsonResponse(data)
 
-    user = User(**dict_obj)
-    user.save()
-    data = {
-        'status': 'success',
-        'message': '{email} added successfully !'.format(
-            email=dict_obj['email']),
-    }
+        data = {
+            'status': 'fail',
+            'message': 'could not add {email}'.format(
+                email=dict_obj['email']),
+        }
 
-    return JsonResponse(data)
-
-    data = {
-        'status': 'fail',
-        'message': 'could not add {email}'.format(
-            email=dict_obj['email']),
-    }
-
-    return JsonResponse(data)
+        return JsonResponse(data)
