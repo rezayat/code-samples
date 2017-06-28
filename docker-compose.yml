@@ -4,7 +4,7 @@ services:
 
   users-db:
     container_name: users-db
-    build: ./project/db
+    build: ./db
     ports:
         - 5435:5432
     environment:
