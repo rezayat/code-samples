@@ -14,19 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-# from django.contrib import admin
-# from django.contrib import auth
-# from recruitment.core import views
-# from django_react import settings
-# from . import settings
 
 urlpatterns = [
-    # url(r'^admin/', admin.site.urls),
     url(r'^users/', include('core.urls')),
-    # url(r'^auth/',include('django.contrib.auth')),
-    # url(r'^auth/login',auth.login),
-    # url(r'^auth/logout',auth.logout),
-    # url('^', include('django.contrib.auth.urls')),
-    # url(r'^core/login',views.login_view),
-    # url(r'^core/logout',views.logout_view),
 ]

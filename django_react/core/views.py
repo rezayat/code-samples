@@ -37,7 +37,7 @@ def users(request, *args, **kwargs):
             data['users'] = users
             data['result'] = 'success'
 
-        except Exception as e:
+        except:
             return JsonResponse(data)
         else:
             pass

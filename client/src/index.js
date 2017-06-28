@@ -1,29 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-// import $ from 'jquery';
 
 import UsersList from './components/UsersList';
 import AddUser from './components/AddUser';
-
-
-// // using jQuery
-// function getCookie(name) {
-//     var cookieValue = null;
-//     if (document.cookie && document.cookie !== '') {
-//         var cookies = document.cookie.split(';');
-//         for (var i = 0; i < cookies.length; i++) {
-//             var cookie = $.trim(cookies[i]);
-//             // Does this cookie string begin with the name we want?
-//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
-//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-//                 break;
-//             }
-//         }
-//     }
-//     return cookieValue;
-// }
-
 
 class App extends Component {
   constructor() {
@@ -50,12 +30,7 @@ class App extends Component {
       username: this.state.username,
       email: this.state.email
     }
-    // axios
-    // .create(
-    // {
-    //   headers: {'X-CSRFToken': getCookie('csrftoken')}
-    // }
-    // )
+
     axios.post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users/`, data)
     .then((res) => {
       this.getUsers();
