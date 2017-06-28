@@ -26,11 +26,6 @@ SECRET_KEY = '@qqvutjqjbp0@ymb)8*$!y52p0#1o__-)1l-4-$)*11ka&1ln_'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    # 'nginx',
-    # '0.0.0.0',
-    # 'users-service',
-    # 'users-db',
-    # 'web-service',
     'localhost',
 ]
 
@@ -38,13 +33,14 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'core',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'core',
 ]
 
 MIDDLEWARE = [
