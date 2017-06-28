@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"migra",
+				"migration"
+			],
+			[
+				"run",
+				"RUN"
+			],
+			[
 				"st",
 				"str\tclass"
 			],
@@ -276,10 +284,19 @@
 	"buffers":
 	[
 		{
-			"file": "django_react/core/views.py",
+			"file": "entrypoint.sh",
 			"settings":
 			{
-				"buffer_size": 2000,
+				"buffer_size": 77,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "docker-compose.yml",
+			"settings":
+			{
+				"buffer_size": 1776,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -289,33 +306,14 @@
 			"settings":
 			{
 				"buffer_size": 3345,
-				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/rawad/.byobu/profile.tmux",
+			"file": "django_react/core/views.py",
 			"settings":
 			{
-				"buffer_size": 47,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/rawad/.bashrc",
-			"settings":
-			{
-				"buffer_size": 4160,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "docker-compose.yml",
-			"settings":
-			{
-				"buffer_size": 1533,
+				"buffer_size": 2000,
 				"line_ending": "Unix"
 			}
 		},
@@ -323,18 +321,8 @@
 			"file": "Dockerfile",
 			"settings":
 			{
-				"buffer_size": 401,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\n  <meta name=\"robots\" content=\"NONE,NOARCHIVE\">\n  <title>DisallowedHost at /users/</title>\n  <style type=\"text/css\">\n    html * { padding:0; margin:0; }\n    body * { padding:10px 20px; }\n    body * * { padding:0; }\n    body { font:small sans-serif; }\n    body>div { border-bottom:1px solid #ddd; }\n    h1 { font-weight:normal; }\n    h2 { margin-bottom:.8em; }\n    h2 span { font-size:80%; color:#666; font-weight:normal; }\n    h3 { margin:1em 0 .5em 0; }\n    h4 { margin:0 0 .5em 0; font-weight: normal; }\n    code, pre { font-size: 100%; white-space: pre-wrap; }\n    table { border:1px solid #ccc; border-collapse: collapse; width:100%; background:white; }\n    tbody td, tbody th { vertical-align:top; padding:2px 3px; }\n    thead th {\n      padding:1px 6px 1px 3px; background:#fefefe; text-align:left;\n      font-weight:normal; font-size:11px; border:1px solid #ddd;\n    }\n    tbody th { width:12em; text-align:right; color:#666; padding-right:.5em; }\n    table.vars { margin:5px 0 2px 40px; }\n    table.vars td, table.req td { font-family:monospace; }\n    table td.code { width:100%; }\n    table td.code pre { overflow:hidden; }\n    table.source th { color:#666; }\n    table.source td { font-family:monospace; white-space:pre; border-bottom:1px solid #eee; }\n    ul.traceback { list-style-type:none; color: #222; }\n    ul.traceback li.frame { padding-bottom:1em; color:#666; }\n    ul.traceback li.user { background-color:#e0e0e0; color:#000 }\n    div.context { padding:10px 0; overflow:hidden; }\n    div.context ol { padding-left:30px; margin:0 10px; list-style-position: inside; }\n    div.context ol li { font-family:monospace; white-space:pre; color:#777; cursor:pointer; padding-left: 2px; }\n    div.context ol li pre { display:inline; }\n    div.context ol.context-line li { color:#505050; background-color:#dfdfdf; padding: 3px 2px; }\n    div.context ol.context-line li span { position:absolute; right:32px; }\n    .user div.context ol.context-line li { background-color:#bbb; color:#000; }\n    .user div.context ol li { color:#666; }\n    div.commands { margin-left: 40px; }\n    div.commands a { color:#555; text-decoration:none; }\n    .user div.commands a { color: black; }\n    #summary { background: #ffc; }\n    #summary h2 { font-weight: normal; color: #666; }\n    #explanation { background:#eee; }\n    #template, #template-not-exist { background:#f6f6f6; }\n    #template-not-exist ul { margin: 0 0 10px 20px; }\n    #template-not-exist .postmortem-section { margin-bottom: 3px; }\n    #unicode-hint { background:#eee; }\n    #traceback { background:#eee; }\n    #requestinfo { background:#f6f6f6; padding-left:120px; }\n    #summary table { border:none; background:transparent; }\n    #requestinfo h2, #requestinfo h3 { position:relative; margin-left:-100px; }\n    #requestinfo h3 { margin-bottom:-1em; }\n    .error { background: #ffc; }\n    .specific { color:#cc3300; font-weight:bold; }\n    h2 span.commands { font-size:.7em;}\n    span.commands a:link {color:#5E5694;}\n    pre.exception_value { font-family: sans-serif; color: #666; font-size: 1.5em; margin: 10px 0 10px 0; }\n    .append-bottom { margin-bottom: 10px; }\n  </style>\n  \n  <script type=\"text/javascript\">\n  //<!--\n    function getElementsByClassName(oElm, strTagName, strClassName){\n        // Written by Jonathan Snook, http://www.snook.ca/jon; Add-ons by Robert Nyman, http://www.robertnyman.com\n        var arrElements = (strTagName == \"*\" && document.all)? document.all :\n        oElm.getElementsByTagName(strTagName);\n        var arrReturnElements = new Array();\n        strClassName = strClassName.replace(/\\-/g, \"\\\\-\");\n        var oRegExp = new RegExp(\"(^|\\\\s)\" + strClassName + \"(\\\\s|$)\");\n        var oElement;\n        for(var i=0; i<arrElements.length; i++){\n            oElement = arrElements[i];\n            if(oRegExp.test(oElement.className)){\n                arrReturnElements.push(oElement);\n            }\n        }\n        return (arrReturnElements)\n    }\n    function hideAll(elems) {\n      for (var e = 0; e < elems.length; e++) {\n        elems[e].style.display = 'none';\n      }\n    }\n    window.onload = function() {\n      hideAll(getElementsByClassName(document, 'table', 'vars'));\n      hideAll(getElementsByClassName(document, 'ol', 'pre-context'));\n      hideAll(getElementsByClassName(document, 'ol', 'post-context'));\n      hideAll(getElementsByClassName(document, 'div', 'pastebin'));\n    }\n    function toggle() {\n      for (var i = 0; i < arguments.length; i++) {\n        var e = document.getElementById(arguments[i]);\n        if (e) {\n          e.style.display = e.style.display == 'none' ? 'block': 'none';\n        }\n      }\n      return false;\n    }\n    function varToggle(link, id) {\n      toggle('v' + id);\n      var s = link.getElementsByTagName('span')[0];\n      var uarr = String.fromCharCode(0x25b6);\n      var darr = String.fromCharCode(0x25bc);\n      s.textContent = s.textContent == uarr ? darr : uarr;\n      return false;\n    }\n    function switchPastebinFriendly(link) {\n      s1 = \"Switch to copy-and-paste view\";\n      s2 = \"Switch back to interactive view\";\n      link.textContent = link.textContent.trim() == s1 ? s2: s1;\n      toggle('browserTraceback', 'pastebinTraceback');\n      return false;\n    }\n    //-->\n  </script>\n  \n</head>\n<body>\n<div id=\"summary\">\n  <h1>DisallowedHost at /users/</h1>\n  <pre class=\"exception_value\">Invalid HTTP_HOST header: &#39;0.0.0.0:5000&#39;. You may need to add &#39;0.0.0.0&#39; to ALLOWED_HOSTS.</pre>\n  <table class=\"meta\">\n\n    <tr>\n      <th>Request Method:</th>\n      <td>POST</td>\n    </tr>\n    <tr>\n      <th>Request URL:</th>\n      <td>http://0.0.0.0:5000/users/</td>\n    </tr>\n\n    <tr>\n      <th>Django Version:</th>\n      <td>1.11.2</td>\n    </tr>\n\n    <tr>\n      <th>Exception Type:</th>\n      <td>DisallowedHost</td>\n    </tr>\n\n\n    <tr>\n      <th>Exception Value:</th>\n      <td><pre>Invalid HTTP_HOST header: &#39;0.0.0.0:5000&#39;. You may need to add &#39;0.0.0.0&#39; to ALLOWED_HOSTS.</pre></td>\n    </tr>\n\n\n    <tr>\n      <th>Exception Location:</th>\n      <td>/usr/local/lib/python3.6/site-packages/django/http/request.py in get_host, line 113</td>\n    </tr>\n\n    <tr>\n      <th>Python Executable:</th>\n      <td>/usr/local/bin/python</td>\n    </tr>\n    <tr>\n      <th>Python Version:</th>\n      <td>3.6.1</td>\n    </tr>\n    <tr>\n      <th>Python Path:</th>\n      <td><pre>[&#39;/usr/src/app/django_react&#39;,\n &#39;/usr/local/bin&#39;,\n &#39;/usr/local/lib/python36.zip&#39;,\n &#39;/usr/local/lib/python3.6&#39;,\n &#39;/usr/local/lib/python3.6/lib-dynload&#39;,\n &#39;/usr/local/lib/python3.6/site-packages&#39;]</pre></td>\n    </tr>\n    <tr>\n      <th>Server time:</th>\n      <td>Thu, 22 Jun 2017 14:53:00 +0300</td>\n    </tr>\n  </table>\n</div>\n\n\n\n\n<div id=\"traceback\">\n  <h2>Traceback <span class=\"commands\"><a href=\"#\" onclick=\"return switchPastebinFriendly(this);\">\n    Switch to copy-and-paste view</a></span>\n  </h2>\n  \n  <div id=\"browserTraceback\">\n    <ul class=\"traceback\">\n      \n        \n        <li class=\"frame django\">\n          <code>/usr/local/lib/python3.6/site-packages/django/core/handlers/exception.py</code> in <code>inner</code>\n\n          \n            <div class=\"context\" id=\"c140406046102536\">\n              \n                <ol start=\"34\" class=\"pre-context\" id=\"pre140406046102536\">\n                \n                  <li onclick=\"toggle('pre140406046102536', 'post140406046102536')\"><pre>    This decorator is automatically applied to all middleware to ensure that</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046102536', 'post140406046102536')\"><pre>    no middleware leaks an exception and that the next middleware in the stack</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046102536', 'post140406046102536')\"><pre>    can rely on getting a response instead of an exception.</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046102536', 'post140406046102536')\"><pre>    &quot;&quot;&quot;</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046102536', 'post140406046102536')\"><pre>    @wraps(get_response, assigned=available_attrs(get_response))</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046102536', 'post140406046102536')\"><pre>    def inner(request):</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046102536', 'post140406046102536')\"><pre>        try:</pre></li>\n                \n                </ol>\n              \n              <ol start=\"41\" class=\"context-line\">\n                <li onclick=\"toggle('pre140406046102536', 'post140406046102536')\"><pre>\n            response = get_response(request)</pre> <span>...</span></li></ol>\n              \n                <ol start='42' class=\"post-context\" id=\"post140406046102536\">\n                  \n                  <li onclick=\"toggle('pre140406046102536', 'post140406046102536')\"><pre>        except Exception as exc:</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046102536', 'post140406046102536')\"><pre>            response = response_for_exception(request, exc)</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046102536', 'post140406046102536')\"><pre>        return response</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046102536', 'post140406046102536')\"><pre>    return inner</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046102536', 'post140406046102536')\"><pre></pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046102536', 'post140406046102536')\"><pre></pre></li>\n                  \n              </ol>\n              \n            </div>\n          \n\n          \n            <div class=\"commands\">\n                \n                    <a href=\"#\" onclick=\"return varToggle(this, '140406046102536')\"><span>&#x25b6;</span> Local vars</a>\n                \n            </div>\n            <table class=\"vars\" id=\"v140406046102536\">\n              <thead>\n                <tr>\n                  <th>Variable</th>\n                  <th>Value</th>\n                </tr>\n              </thead>\n              <tbody>\n                \n                  <tr>\n                    <td>exc</td>\n                    <td class=\"code\"><pre>DisallowedHost(&quot;Invalid HTTP_HOST header: &#39;0.0.0.0:5000&#39;. You may need to add &#39;0.0.0.0&#39; to ALLOWED_HOSTS.&quot;,)</pre></td>\n                  </tr>\n                \n                  <tr>\n                    <td>get_response</td>\n                    <td class=\"code\"><pre>&lt;django.middleware.common.CommonMiddleware object at 0x7fb2d4812cc0&gt;</pre></td>\n                  </tr>\n                \n                  <tr>\n                    <td>request</td>\n                    <td class=\"code\"><pre>&lt;WSGIRequest: POST &#39;/users/&#39;&gt;</pre></td>\n                  </tr>\n                \n              </tbody>\n            </table>\n          \n        </li>\n      \n        \n        <li class=\"frame django\">\n          <code>/usr/local/lib/python3.6/site-packages/django/utils/deprecation.py</code> in <code>__call__</code>\n\n          \n            <div class=\"context\" id=\"c140406046104200\">\n              \n                <ol start=\"131\" class=\"pre-context\" id=\"pre140406046104200\">\n                \n                  <li onclick=\"toggle('pre140406046104200', 'post140406046104200')\"><pre>    def __init__(self, get_response=None):</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046104200', 'post140406046104200')\"><pre>        self.get_response = get_response</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046104200', 'post140406046104200')\"><pre>        super(MiddlewareMixin, self).__init__()</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046104200', 'post140406046104200')\"><pre></pre></li>\n                \n                  <li onclick=\"toggle('pre140406046104200', 'post140406046104200')\"><pre>    def __call__(self, request):</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046104200', 'post140406046104200')\"><pre>        response = None</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046104200', 'post140406046104200')\"><pre>        if hasattr(self, &#39;process_request&#39;):</pre></li>\n                \n                </ol>\n              \n              <ol start=\"138\" class=\"context-line\">\n                <li onclick=\"toggle('pre140406046104200', 'post140406046104200')\"><pre>\n            response = self.process_request(request)</pre> <span>...</span></li></ol>\n              \n                <ol start='139' class=\"post-context\" id=\"post140406046104200\">\n                  \n                  <li onclick=\"toggle('pre140406046104200', 'post140406046104200')\"><pre>        if not response:</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046104200', 'post140406046104200')\"><pre>            response = self.get_response(request)</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046104200', 'post140406046104200')\"><pre>        if hasattr(self, &#39;process_response&#39;):</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046104200', 'post140406046104200')\"><pre>            response = self.process_response(request, response)</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046104200', 'post140406046104200')\"><pre>        return response</pre></li>\n                  \n              </ol>\n              \n            </div>\n          \n\n          \n            <div class=\"commands\">\n                \n                    <a href=\"#\" onclick=\"return varToggle(this, '140406046104200')\"><span>&#x25b6;</span> Local vars</a>\n                \n            </div>\n            <table class=\"vars\" id=\"v140406046104200\">\n              <thead>\n                <tr>\n                  <th>Variable</th>\n                  <th>Value</th>\n                </tr>\n              </thead>\n              <tbody>\n                \n                  <tr>\n                    <td>request</td>\n                    <td class=\"code\"><pre>&lt;WSGIRequest: POST &#39;/users/&#39;&gt;</pre></td>\n                  </tr>\n                \n                  <tr>\n                    <td>response</td>\n                    <td class=\"code\"><pre>None</pre></td>\n                  </tr>\n                \n                  <tr>\n                    <td>self</td>\n                    <td class=\"code\"><pre>&lt;django.middleware.common.CommonMiddleware object at 0x7fb2d4812cc0&gt;</pre></td>\n                  </tr>\n                \n              </tbody>\n            </table>\n          \n        </li>\n      \n        \n        <li class=\"frame django\">\n          <code>/usr/local/lib/python3.6/site-packages/django/middleware/common.py</code> in <code>process_request</code>\n\n          \n            <div class=\"context\" id=\"c140406046103048\">\n              \n                <ol start=\"50\" class=\"pre-context\" id=\"pre140406046103048\">\n                \n                  <li onclick=\"toggle('pre140406046103048', 'post140406046103048')\"><pre>        # Check for denied User-Agents</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046103048', 'post140406046103048')\"><pre>        if &#39;HTTP_USER_AGENT&#39; in request.META:</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046103048', 'post140406046103048')\"><pre>            for user_agent_regex in settings.DISALLOWED_USER_AGENTS:</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046103048', 'post140406046103048')\"><pre>                if user_agent_regex.search(request.META[&#39;HTTP_USER_AGENT&#39;]):</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046103048', 'post140406046103048')\"><pre>                    raise PermissionDenied(&#39;Forbidden user agent&#39;)</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046103048', 'post140406046103048')\"><pre></pre></li>\n                \n                  <li onclick=\"toggle('pre140406046103048', 'post140406046103048')\"><pre>        # Check for a redirect based on settings.PREPEND_WWW</pre></li>\n                \n                </ol>\n              \n              <ol start=\"57\" class=\"context-line\">\n                <li onclick=\"toggle('pre140406046103048', 'post140406046103048')\"><pre>\n        host = request.get_host()</pre> <span>...</span></li></ol>\n              \n                <ol start='58' class=\"post-context\" id=\"post140406046103048\">\n                  \n                  <li onclick=\"toggle('pre140406046103048', 'post140406046103048')\"><pre>        must_prepend = settings.PREPEND_WWW and host and not host.startswith(&#39;www.&#39;)</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046103048', 'post140406046103048')\"><pre>        redirect_url = (&#39;%s://www.%s&#39; % (request.scheme, host)) if must_prepend else &#39;&#39;</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046103048', 'post140406046103048')\"><pre></pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046103048', 'post140406046103048')\"><pre>        # Check if a slash should be appended</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046103048', 'post140406046103048')\"><pre>        if self.should_redirect_with_slash(request):</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046103048', 'post140406046103048')\"><pre>            path = self.get_full_path_with_slash(request)</pre></li>\n                  \n              </ol>\n              \n            </div>\n          \n\n          \n            <div class=\"commands\">\n                \n                    <a href=\"#\" onclick=\"return varToggle(this, '140406046103048')\"><span>&#x25b6;</span> Local vars</a>\n                \n            </div>\n            <table class=\"vars\" id=\"v140406046103048\">\n              <thead>\n                <tr>\n                  <th>Variable</th>\n                  <th>Value</th>\n                </tr>\n              </thead>\n              <tbody>\n                \n                  <tr>\n                    <td>request</td>\n                    <td class=\"code\"><pre>&lt;WSGIRequest: POST &#39;/users/&#39;&gt;</pre></td>\n                  </tr>\n                \n                  <tr>\n                    <td>self</td>\n                    <td class=\"code\"><pre>&lt;django.middleware.common.CommonMiddleware object at 0x7fb2d4812cc0&gt;</pre></td>\n                  </tr>\n                \n              </tbody>\n            </table>\n          \n        </li>\n      \n        \n        <li class=\"frame django\">\n          <code>/usr/local/lib/python3.6/site-packages/django/http/request.py</code> in <code>get_host</code>\n\n          \n            <div class=\"context\" id=\"c140406046105288\">\n              \n                <ol start=\"106\" class=\"pre-context\" id=\"pre140406046105288\">\n                \n                  <li onclick=\"toggle('pre140406046105288', 'post140406046105288')\"><pre>            return host</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046105288', 'post140406046105288')\"><pre>        else:</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046105288', 'post140406046105288')\"><pre>            msg = &quot;Invalid HTTP_HOST header: %r.&quot; % host</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046105288', 'post140406046105288')\"><pre>            if domain:</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046105288', 'post140406046105288')\"><pre>                msg += &quot; You may need to add %r to ALLOWED_HOSTS.&quot; % domain</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046105288', 'post140406046105288')\"><pre>            else:</pre></li>\n                \n                  <li onclick=\"toggle('pre140406046105288', 'post140406046105288')\"><pre>                msg += &quot; The domain name provided is not valid according to RFC 1034/1035.&quot;</pre></li>\n                \n                </ol>\n              \n              <ol start=\"113\" class=\"context-line\">\n                <li onclick=\"toggle('pre140406046105288', 'post140406046105288')\"><pre>\n            raise DisallowedHost(msg)</pre> <span>...</span></li></ol>\n              \n                <ol start='114' class=\"post-context\" id=\"post140406046105288\">\n                  \n                  <li onclick=\"toggle('pre140406046105288', 'post140406046105288')\"><pre></pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046105288', 'post140406046105288')\"><pre>    def get_port(self):</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046105288', 'post140406046105288')\"><pre>        &quot;&quot;&quot;Return the port number for the request as a string.&quot;&quot;&quot;</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046105288', 'post140406046105288')\"><pre>        if settings.USE_X_FORWARDED_PORT and &#39;HTTP_X_FORWARDED_PORT&#39; in self.META:</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046105288', 'post140406046105288')\"><pre>            port = self.META[&#39;HTTP_X_FORWARDED_PORT&#39;]</pre></li>\n                  \n                  <li onclick=\"toggle('pre140406046105288', 'post140406046105288')\"><pre>        else:</pre></li>\n                  \n              </ol>\n              \n            </div>\n          \n\n          \n            <div class=\"commands\">\n                \n                    <a href=\"#\" onclick=\"return varToggle(this, '140406046105288')\"><span>&#x25b6;</span> Local vars</a>\n                \n            </div>\n            <table class=\"vars\" id=\"v140406046105288\">\n              <thead>\n                <tr>\n                  <th>Variable</th>\n                  <th>Value</th>\n                </tr>\n              </thead>\n              <tbody>\n                \n                  <tr>\n                    <td>allowed_hosts</td>\n                    <td class=\"code\"><pre>[&#39;localhost&#39;, &#39;127.0.0.1&#39;, &#39;[::1]&#39;]</pre></td>\n                  </tr>\n                \n                  <tr>\n                    <td>domain</td>\n                    <td class=\"code\"><pre>&#39;0.0.0.0&#39;</pre></td>\n                  </tr>\n                \n                  <tr>\n                    <td>host</td>\n                    <td class=\"code\"><pre>&#39;0.0.0.0:5000&#39;</pre></td>\n                  </tr>\n                \n                  <tr>\n                    <td>msg</td>\n                    <td class=\"code\"><pre>(&quot;Invalid HTTP_HOST header: &#39;0.0.0.0:5000&#39;. You may need to add &#39;0.0.0.0&#39; to &quot;\n &#39;ALLOWED_HOSTS.&#39;)</pre></td>\n                  </tr>\n                \n                  <tr>\n                    <td>port</td>\n                    <td class=\"code\"><pre>&#39;5000&#39;</pre></td>\n                  </tr>\n                \n                  <tr>\n                    <td>self</td>\n                    <td class=\"code\"><pre>&lt;WSGIRequest: POST &#39;/users/&#39;&gt;</pre></td>\n                  </tr>\n                \n              </tbody>\n            </table>\n          \n        </li>\n      \n    </ul>\n  </div>\n  \n  <form action=\"http://dpaste.com/\" name=\"pasteform\" id=\"pasteform\" method=\"post\">\n\n  <div id=\"pastebinTraceback\" class=\"pastebin\">\n    <input type=\"hidden\" name=\"language\" value=\"PythonConsole\">\n    <input type=\"hidden\" name=\"title\"\n      value=\"DisallowedHost at /users/\">\n    <input type=\"hidden\" name=\"source\" value=\"Django Dpaste Agent\">\n    <input type=\"hidden\" name=\"poster\" value=\"Django\">\n    <textarea name=\"content\" id=\"traceback_area\" cols=\"140\" rows=\"25\">\nEnvironment:\n\n\nRequest Method: POST\nRequest URL: http://0.0.0.0:5000/users/\n\nDjango Version: 1.11.2\nPython Version: 3.6.1\nInstalled Applications:\n[&#39;core&#39;,\n &#39;django.contrib.admin&#39;,\n &#39;django.contrib.auth&#39;,\n &#39;django.contrib.contenttypes&#39;,\n &#39;django.contrib.sessions&#39;,\n &#39;django.contrib.messages&#39;,\n &#39;django.contrib.staticfiles&#39;]\nInstalled Middleware:\n[&#39;django.middleware.security.SecurityMiddleware&#39;,\n &#39;django.contrib.sessions.middleware.SessionMiddleware&#39;,\n &#39;django.middleware.common.CommonMiddleware&#39;,\n &#39;django.middleware.csrf.CsrfViewMiddleware&#39;,\n &#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;,\n &#39;django.contrib.messages.middleware.MessageMiddleware&#39;,\n &#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;]\n\n\n\nTraceback:\n\nFile \"/usr/local/lib/python3.6/site-packages/django/core/handlers/exception.py\" in inner\n  41.             response = get_response(request)\n\nFile \"/usr/local/lib/python3.6/site-packages/django/utils/deprecation.py\" in __call__\n  138.             response = self.process_request(request)\n\nFile \"/usr/local/lib/python3.6/site-packages/django/middleware/common.py\" in process_request\n  57.         host = request.get_host()\n\nFile \"/usr/local/lib/python3.6/site-packages/django/http/request.py\" in get_host\n  113.             raise DisallowedHost(msg)\n\nException Type: DisallowedHost at /users/\nException Value: Invalid HTTP_HOST header: &#39;0.0.0.0:5000&#39;. You may need to add &#39;0.0.0.0&#39; to ALLOWED_HOSTS.\n</textarea>\n  <br><br>\n  <input type=\"submit\" value=\"Share this traceback on a public website\">\n  </div>\n</form>\n</div>\n\n\n\n<div id=\"requestinfo\">\n  <h2>Request information</h2>\n\n\n  \n    <h3 id=\"user-info\">USER</h3>\n    <p>[unable to retrieve the current user]</p>\n  \n\n  <h3 id=\"get-info\">GET</h3>\n  \n    <p>No GET data</p>\n  \n\n  <h3 id=\"post-info\">POST</h3>\n  \n    <p>No POST data</p>\n  \n  <h3 id=\"files-info\">FILES</h3>\n  \n    <p>No FILES data</p>\n  \n\n\n  <h3 id=\"cookie-info\">COOKIES</h3>\n  \n    <p>No cookie data</p>\n  \n\n  <h3 id=\"meta-info\">META</h3>\n  <table class=\"req\">\n    <thead>\n      <tr>\n        <th>Variable</th>\n        <th>Value</th>\n      </tr>\n    </thead>\n    <tbody>\n      \n        <tr>\n          <td>CONTENT_LENGTH</td>\n          <td class=\"code\"><pre>&#39;47&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CONTENT_TYPE</td>\n          <td class=\"code\"><pre>&#39;application/json&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>HTTP_ACCEPT</td>\n          <td class=\"code\"><pre>&#39;*/*&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>HTTP_HOST</td>\n          <td class=\"code\"><pre>&#39;0.0.0.0:5000&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>HTTP_USER_AGENT</td>\n          <td class=\"code\"><pre>&#39;curl/7.38.0&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>PATH_INFO</td>\n          <td class=\"code\"><pre>&#39;/users/&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>QUERY_STRING</td>\n          <td class=\"code\"><pre>&#39;&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>RAW_URI</td>\n          <td class=\"code\"><pre>&#39;/users/&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>REMOTE_ADDR</td>\n          <td class=\"code\"><pre>&#39;127.0.0.1&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>REMOTE_PORT</td>\n          <td class=\"code\"><pre>&#39;57236&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>REQUEST_METHOD</td>\n          <td class=\"code\"><pre>&#39;POST&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SCRIPT_NAME</td>\n          <td class=\"code\"><pre>&#39;&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SERVER_NAME</td>\n          <td class=\"code\"><pre>&#39;0.0.0.0&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SERVER_PORT</td>\n          <td class=\"code\"><pre>&#39;5000&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SERVER_PROTOCOL</td>\n          <td class=\"code\"><pre>&#39;HTTP/1.1&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SERVER_SOFTWARE</td>\n          <td class=\"code\"><pre>&#39;gunicorn/19.7.1&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>gunicorn.socket</td>\n          <td class=\"code\"><pre>&lt;socket.socket fd=10, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=(&#39;127.0.0.1&#39;, 5000), raddr=(&#39;127.0.0.1&#39;, 57236)&gt;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>wsgi.errors</td>\n          <td class=\"code\"><pre>&lt;gunicorn.http.wsgi.WSGIErrorsWrapper object at 0x7fb2d41943c8&gt;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>wsgi.file_wrapper</td>\n          <td class=\"code\"><pre>&#39;&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>wsgi.input</td>\n          <td class=\"code\"><pre>&lt;gunicorn.http.body.Body object at 0x7fb2d4194358&gt;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>wsgi.multiprocess</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>wsgi.multithread</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>wsgi.run_once</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>wsgi.url_scheme</td>\n          <td class=\"code\"><pre>&#39;http&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>wsgi.version</td>\n          <td class=\"code\"><pre>(1, 0)</pre></td>\n        </tr>\n      \n    </tbody>\n  </table>\n\n\n  <h3 id=\"settings-info\">Settings</h3>\n  <h4>Using settings module <code>django_react.settings</code></h4>\n  <table class=\"req\">\n    <thead>\n      <tr>\n        <th>Setting</th>\n        <th>Value</th>\n      </tr>\n    </thead>\n    <tbody>\n      \n        <tr>\n          <td>ABSOLUTE_URL_OVERRIDES</td>\n          <td class=\"code\"><pre>{}</pre></td>\n        </tr>\n      \n        <tr>\n          <td>ADMINS</td>\n          <td class=\"code\"><pre>[]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>ALLOWED_HOSTS</td>\n          <td class=\"code\"><pre>[]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>APPEND_SLASH</td>\n          <td class=\"code\"><pre>True</pre></td>\n        </tr>\n      \n        <tr>\n          <td>AUTHENTICATION_BACKENDS</td>\n          <td class=\"code\"><pre>[&#39;django.contrib.auth.backends.ModelBackend&#39;]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>AUTH_PASSWORD_VALIDATORS</td>\n          <td class=\"code\"><pre>&#39;********************&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>AUTH_USER_MODEL</td>\n          <td class=\"code\"><pre>&#39;auth.User&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>BASE_DIR</td>\n          <td class=\"code\"><pre>&#39;/usr/src/app/django_react&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CACHES</td>\n          <td class=\"code\"><pre>{&#39;default&#39;: {&#39;BACKEND&#39;: &#39;django.core.cache.backends.locmem.LocMemCache&#39;}}</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CACHE_MIDDLEWARE_ALIAS</td>\n          <td class=\"code\"><pre>&#39;default&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CACHE_MIDDLEWARE_KEY_PREFIX</td>\n          <td class=\"code\"><pre>&#39;********************&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CACHE_MIDDLEWARE_SECONDS</td>\n          <td class=\"code\"><pre>600</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CSRF_COOKIE_AGE</td>\n          <td class=\"code\"><pre>31449600</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CSRF_COOKIE_DOMAIN</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CSRF_COOKIE_HTTPONLY</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CSRF_COOKIE_NAME</td>\n          <td class=\"code\"><pre>&#39;csrftoken&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CSRF_COOKIE_PATH</td>\n          <td class=\"code\"><pre>&#39;/&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CSRF_COOKIE_SECURE</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CSRF_FAILURE_VIEW</td>\n          <td class=\"code\"><pre>&#39;django.views.csrf.csrf_failure&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CSRF_HEADER_NAME</td>\n          <td class=\"code\"><pre>&#39;HTTP_X_CSRFTOKEN&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CSRF_TRUSTED_ORIGINS</td>\n          <td class=\"code\"><pre>[]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>CSRF_USE_SESSIONS</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DATABASES</td>\n          <td class=\"code\"><pre>{&#39;default&#39;: {&#39;ATOMIC_REQUESTS&#39;: False,\n             &#39;AUTOCOMMIT&#39;: True,\n             &#39;CONN_MAX_AGE&#39;: 0,\n             &#39;ENGINE&#39;: &#39;django.db.backends.postgresql_psycopg2&#39;,\n             &#39;HOST&#39;: &#39;users-db&#39;,\n             &#39;NAME&#39;: &#39;users_dev&#39;,\n             &#39;OPTIONS&#39;: {},\n             &#39;PASSWORD&#39;: &#39;********************&#39;,\n             &#39;PORT&#39;: &#39;5432&#39;,\n             &#39;TEST&#39;: {&#39;CHARSET&#39;: None,\n                      &#39;COLLATION&#39;: None,\n                      &#39;MIRROR&#39;: None,\n                      &#39;NAME&#39;: None},\n             &#39;TIME_ZONE&#39;: None,\n             &#39;USER&#39;: &#39;postgres&#39;}}</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DATABASE_ROUTERS</td>\n          <td class=\"code\"><pre>[]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DATA_UPLOAD_MAX_MEMORY_SIZE</td>\n          <td class=\"code\"><pre>2621440</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DATA_UPLOAD_MAX_NUMBER_FIELDS</td>\n          <td class=\"code\"><pre>1000</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DATETIME_FORMAT</td>\n          <td class=\"code\"><pre>&#39;N j, Y, P&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DATETIME_INPUT_FORMATS</td>\n          <td class=\"code\"><pre>[&#39;%Y-%m-%d %H:%M:%S&#39;,\n &#39;%Y-%m-%d %H:%M:%S.%f&#39;,\n &#39;%Y-%m-%d %H:%M&#39;,\n &#39;%Y-%m-%d&#39;,\n &#39;%m/%d/%Y %H:%M:%S&#39;,\n &#39;%m/%d/%Y %H:%M:%S.%f&#39;,\n &#39;%m/%d/%Y %H:%M&#39;,\n &#39;%m/%d/%Y&#39;,\n &#39;%m/%d/%y %H:%M:%S&#39;,\n &#39;%m/%d/%y %H:%M:%S.%f&#39;,\n &#39;%m/%d/%y %H:%M&#39;,\n &#39;%m/%d/%y&#39;]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DATE_FORMAT</td>\n          <td class=\"code\"><pre>&#39;N j, Y&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DATE_INPUT_FORMATS</td>\n          <td class=\"code\"><pre>[&#39;%Y-%m-%d&#39;,\n &#39;%m/%d/%Y&#39;,\n &#39;%m/%d/%y&#39;,\n &#39;%b %d %Y&#39;,\n &#39;%b %d, %Y&#39;,\n &#39;%d %b %Y&#39;,\n &#39;%d %b, %Y&#39;,\n &#39;%B %d %Y&#39;,\n &#39;%B %d, %Y&#39;,\n &#39;%d %B %Y&#39;,\n &#39;%d %B, %Y&#39;]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DEBUG</td>\n          <td class=\"code\"><pre>True</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DEBUG_PROPAGATE_EXCEPTIONS</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DECIMAL_SEPARATOR</td>\n          <td class=\"code\"><pre>&#39;.&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DEFAULT_CHARSET</td>\n          <td class=\"code\"><pre>&#39;utf-8&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DEFAULT_CONTENT_TYPE</td>\n          <td class=\"code\"><pre>&#39;text/html&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DEFAULT_EXCEPTION_REPORTER_FILTER</td>\n          <td class=\"code\"><pre>&#39;django.views.debug.SafeExceptionReporterFilter&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DEFAULT_FILE_STORAGE</td>\n          <td class=\"code\"><pre>&#39;django.core.files.storage.FileSystemStorage&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DEFAULT_FROM_EMAIL</td>\n          <td class=\"code\"><pre>&#39;webmaster@localhost&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DEFAULT_INDEX_TABLESPACE</td>\n          <td class=\"code\"><pre>&#39;&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DEFAULT_TABLESPACE</td>\n          <td class=\"code\"><pre>&#39;&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>DISALLOWED_USER_AGENTS</td>\n          <td class=\"code\"><pre>[]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>EMAIL_BACKEND</td>\n          <td class=\"code\"><pre>&#39;django.core.mail.backends.smtp.EmailBackend&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>EMAIL_HOST</td>\n          <td class=\"code\"><pre>&#39;localhost&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>EMAIL_HOST_PASSWORD</td>\n          <td class=\"code\"><pre>&#39;********************&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>EMAIL_HOST_USER</td>\n          <td class=\"code\"><pre>&#39;&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>EMAIL_PORT</td>\n          <td class=\"code\"><pre>25</pre></td>\n        </tr>\n      \n        <tr>\n          <td>EMAIL_SSL_CERTFILE</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>EMAIL_SSL_KEYFILE</td>\n          <td class=\"code\"><pre>&#39;********************&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>EMAIL_SUBJECT_PREFIX</td>\n          <td class=\"code\"><pre>&#39;[Django] &#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>EMAIL_TIMEOUT</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>EMAIL_USE_LOCALTIME</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>EMAIL_USE_SSL</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>EMAIL_USE_TLS</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>FILE_CHARSET</td>\n          <td class=\"code\"><pre>&#39;utf-8&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>FILE_UPLOAD_DIRECTORY_PERMISSIONS</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>FILE_UPLOAD_HANDLERS</td>\n          <td class=\"code\"><pre>[&#39;django.core.files.uploadhandler.MemoryFileUploadHandler&#39;,\n &#39;django.core.files.uploadhandler.TemporaryFileUploadHandler&#39;]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>FILE_UPLOAD_MAX_MEMORY_SIZE</td>\n          <td class=\"code\"><pre>2621440</pre></td>\n        </tr>\n      \n        <tr>\n          <td>FILE_UPLOAD_PERMISSIONS</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>FILE_UPLOAD_TEMP_DIR</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>FIRST_DAY_OF_WEEK</td>\n          <td class=\"code\"><pre>0</pre></td>\n        </tr>\n      \n        <tr>\n          <td>FIXTURE_DIRS</td>\n          <td class=\"code\"><pre>[]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>FORCE_SCRIPT_NAME</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>FORMAT_MODULE_PATH</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>FORM_RENDERER</td>\n          <td class=\"code\"><pre>&#39;django.forms.renderers.DjangoTemplates&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>IGNORABLE_404_URLS</td>\n          <td class=\"code\"><pre>[]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>INSTALLED_APPS</td>\n          <td class=\"code\"><pre>[&#39;core&#39;,\n &#39;django.contrib.admin&#39;,\n &#39;django.contrib.auth&#39;,\n &#39;django.contrib.contenttypes&#39;,\n &#39;django.contrib.sessions&#39;,\n &#39;django.contrib.messages&#39;,\n &#39;django.contrib.staticfiles&#39;]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>INTERNAL_IPS</td>\n          <td class=\"code\"><pre>[]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>LANGUAGES</td>\n          <td class=\"code\"><pre>[(&#39;af&#39;, &#39;Afrikaans&#39;),\n (&#39;ar&#39;, &#39;Arabic&#39;),\n (&#39;ast&#39;, &#39;Asturian&#39;),\n (&#39;az&#39;, &#39;Azerbaijani&#39;),\n (&#39;bg&#39;, &#39;Bulgarian&#39;),\n (&#39;be&#39;, &#39;Belarusian&#39;),\n (&#39;bn&#39;, &#39;Bengali&#39;),\n (&#39;br&#39;, &#39;Breton&#39;),\n (&#39;bs&#39;, &#39;Bosnian&#39;),\n (&#39;ca&#39;, &#39;Catalan&#39;),\n (&#39;cs&#39;, &#39;Czech&#39;),\n (&#39;cy&#39;, &#39;Welsh&#39;),\n (&#39;da&#39;, &#39;Danish&#39;),\n (&#39;de&#39;, &#39;German&#39;),\n (&#39;dsb&#39;, &#39;Lower Sorbian&#39;),\n (&#39;el&#39;, &#39;Greek&#39;),\n (&#39;en&#39;, &#39;English&#39;),\n (&#39;en-au&#39;, &#39;Australian English&#39;),\n (&#39;en-gb&#39;, &#39;British English&#39;),\n (&#39;eo&#39;, &#39;Esperanto&#39;),\n (&#39;es&#39;, &#39;Spanish&#39;),\n (&#39;es-ar&#39;, &#39;Argentinian Spanish&#39;),\n (&#39;es-co&#39;, &#39;Colombian Spanish&#39;),\n (&#39;es-mx&#39;, &#39;Mexican Spanish&#39;),\n (&#39;es-ni&#39;, &#39;Nicaraguan Spanish&#39;),\n (&#39;es-ve&#39;, &#39;Venezuelan Spanish&#39;),\n (&#39;et&#39;, &#39;Estonian&#39;),\n (&#39;eu&#39;, &#39;Basque&#39;),\n (&#39;fa&#39;, &#39;Persian&#39;),\n (&#39;fi&#39;, &#39;Finnish&#39;),\n (&#39;fr&#39;, &#39;French&#39;),\n (&#39;fy&#39;, &#39;Frisian&#39;),\n (&#39;ga&#39;, &#39;Irish&#39;),\n (&#39;gd&#39;, &#39;Scottish Gaelic&#39;),\n (&#39;gl&#39;, &#39;Galician&#39;),\n (&#39;he&#39;, &#39;Hebrew&#39;),\n (&#39;hi&#39;, &#39;Hindi&#39;),\n (&#39;hr&#39;, &#39;Croatian&#39;),\n (&#39;hsb&#39;, &#39;Upper Sorbian&#39;),\n (&#39;hu&#39;, &#39;Hungarian&#39;),\n (&#39;ia&#39;, &#39;Interlingua&#39;),\n (&#39;id&#39;, &#39;Indonesian&#39;),\n (&#39;io&#39;, &#39;Ido&#39;),\n (&#39;is&#39;, &#39;Icelandic&#39;),\n (&#39;it&#39;, &#39;Italian&#39;),\n (&#39;ja&#39;, &#39;Japanese&#39;),\n (&#39;ka&#39;, &#39;Georgian&#39;),\n (&#39;kk&#39;, &#39;Kazakh&#39;),\n (&#39;km&#39;, &#39;Khmer&#39;),\n (&#39;kn&#39;, &#39;Kannada&#39;),\n (&#39;ko&#39;, &#39;Korean&#39;),\n (&#39;lb&#39;, &#39;Luxembourgish&#39;),\n (&#39;lt&#39;, &#39;Lithuanian&#39;),\n (&#39;lv&#39;, &#39;Latvian&#39;),\n (&#39;mk&#39;, &#39;Macedonian&#39;),\n (&#39;ml&#39;, &#39;Malayalam&#39;),\n (&#39;mn&#39;, &#39;Mongolian&#39;),\n (&#39;mr&#39;, &#39;Marathi&#39;),\n (&#39;my&#39;, &#39;Burmese&#39;),\n (&#39;nb&#39;, &#39;Norwegian Bokmål&#39;),\n (&#39;ne&#39;, &#39;Nepali&#39;),\n (&#39;nl&#39;, &#39;Dutch&#39;),\n (&#39;nn&#39;, &#39;Norwegian Nynorsk&#39;),\n (&#39;os&#39;, &#39;Ossetic&#39;),\n (&#39;pa&#39;, &#39;Punjabi&#39;),\n (&#39;pl&#39;, &#39;Polish&#39;),\n (&#39;pt&#39;, &#39;Portuguese&#39;),\n (&#39;pt-br&#39;, &#39;Brazilian Portuguese&#39;),\n (&#39;ro&#39;, &#39;Romanian&#39;),\n (&#39;ru&#39;, &#39;Russian&#39;),\n (&#39;sk&#39;, &#39;Slovak&#39;),\n (&#39;sl&#39;, &#39;Slovenian&#39;),\n (&#39;sq&#39;, &#39;Albanian&#39;),\n (&#39;sr&#39;, &#39;Serbian&#39;),\n (&#39;sr-latn&#39;, &#39;Serbian Latin&#39;),\n (&#39;sv&#39;, &#39;Swedish&#39;),\n (&#39;sw&#39;, &#39;Swahili&#39;),\n (&#39;ta&#39;, &#39;Tamil&#39;),\n (&#39;te&#39;, &#39;Telugu&#39;),\n (&#39;th&#39;, &#39;Thai&#39;),\n (&#39;tr&#39;, &#39;Turkish&#39;),\n (&#39;tt&#39;, &#39;Tatar&#39;),\n (&#39;udm&#39;, &#39;Udmurt&#39;),\n (&#39;uk&#39;, &#39;Ukrainian&#39;),\n (&#39;ur&#39;, &#39;Urdu&#39;),\n (&#39;vi&#39;, &#39;Vietnamese&#39;),\n (&#39;zh-hans&#39;, &#39;Simplified Chinese&#39;),\n (&#39;zh-hant&#39;, &#39;Traditional Chinese&#39;)]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>LANGUAGES_BIDI</td>\n          <td class=\"code\"><pre>[&#39;he&#39;, &#39;ar&#39;, &#39;fa&#39;, &#39;ur&#39;]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>LANGUAGE_CODE</td>\n          <td class=\"code\"><pre>&#39;en-us&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>LANGUAGE_COOKIE_AGE</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>LANGUAGE_COOKIE_DOMAIN</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>LANGUAGE_COOKIE_NAME</td>\n          <td class=\"code\"><pre>&#39;django_language&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>LANGUAGE_COOKIE_PATH</td>\n          <td class=\"code\"><pre>&#39;/&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>LOCALE_PATHS</td>\n          <td class=\"code\"><pre>[]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>LOGGING</td>\n          <td class=\"code\"><pre>{}</pre></td>\n        </tr>\n      \n        <tr>\n          <td>LOGGING_CONFIG</td>\n          <td class=\"code\"><pre>&#39;logging.config.dictConfig&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>LOGIN_REDIRECT_URL</td>\n          <td class=\"code\"><pre>&#39;/accounts/profile/&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>LOGIN_URL</td>\n          <td class=\"code\"><pre>&#39;/accounts/login/&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>LOGOUT_REDIRECT_URL</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>MANAGERS</td>\n          <td class=\"code\"><pre>[]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>MEDIA_ROOT</td>\n          <td class=\"code\"><pre>&#39;&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>MEDIA_URL</td>\n          <td class=\"code\"><pre>&#39;&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>MESSAGE_STORAGE</td>\n          <td class=\"code\"><pre>&#39;django.contrib.messages.storage.fallback.FallbackStorage&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>MIDDLEWARE</td>\n          <td class=\"code\"><pre>[&#39;django.middleware.security.SecurityMiddleware&#39;,\n &#39;django.contrib.sessions.middleware.SessionMiddleware&#39;,\n &#39;django.middleware.common.CommonMiddleware&#39;,\n &#39;django.middleware.csrf.CsrfViewMiddleware&#39;,\n &#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;,\n &#39;django.contrib.messages.middleware.MessageMiddleware&#39;,\n &#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>MIDDLEWARE_CLASSES</td>\n          <td class=\"code\"><pre>[&#39;django.middleware.common.CommonMiddleware&#39;,\n &#39;django.middleware.csrf.CsrfViewMiddleware&#39;]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>MIGRATION_MODULES</td>\n          <td class=\"code\"><pre>{}</pre></td>\n        </tr>\n      \n        <tr>\n          <td>MONTH_DAY_FORMAT</td>\n          <td class=\"code\"><pre>&#39;F j&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>NUMBER_GROUPING</td>\n          <td class=\"code\"><pre>0</pre></td>\n        </tr>\n      \n        <tr>\n          <td>PASSWORD_HASHERS</td>\n          <td class=\"code\"><pre>&#39;********************&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>PASSWORD_RESET_TIMEOUT_DAYS</td>\n          <td class=\"code\"><pre>&#39;********************&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>PREPEND_WWW</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>ROOT_URLCONF</td>\n          <td class=\"code\"><pre>&#39;django_react.urls&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SECRET_KEY</td>\n          <td class=\"code\"><pre>&#39;********************&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SECURE_BROWSER_XSS_FILTER</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SECURE_CONTENT_TYPE_NOSNIFF</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SECURE_HSTS_INCLUDE_SUBDOMAINS</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SECURE_HSTS_PRELOAD</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SECURE_HSTS_SECONDS</td>\n          <td class=\"code\"><pre>0</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SECURE_PROXY_SSL_HEADER</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SECURE_REDIRECT_EXEMPT</td>\n          <td class=\"code\"><pre>[]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SECURE_SSL_HOST</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SECURE_SSL_REDIRECT</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SERVER_EMAIL</td>\n          <td class=\"code\"><pre>&#39;root@localhost&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SESSION_CACHE_ALIAS</td>\n          <td class=\"code\"><pre>&#39;default&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SESSION_COOKIE_AGE</td>\n          <td class=\"code\"><pre>1209600</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SESSION_COOKIE_DOMAIN</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SESSION_COOKIE_HTTPONLY</td>\n          <td class=\"code\"><pre>True</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SESSION_COOKIE_NAME</td>\n          <td class=\"code\"><pre>&#39;sessionid&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SESSION_COOKIE_PATH</td>\n          <td class=\"code\"><pre>&#39;/&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SESSION_COOKIE_SECURE</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SESSION_ENGINE</td>\n          <td class=\"code\"><pre>&#39;django.contrib.sessions.backends.db&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SESSION_EXPIRE_AT_BROWSER_CLOSE</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SESSION_FILE_PATH</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SESSION_SAVE_EVERY_REQUEST</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SESSION_SERIALIZER</td>\n          <td class=\"code\"><pre>&#39;django.contrib.sessions.serializers.JSONSerializer&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SETTINGS_MODULE</td>\n          <td class=\"code\"><pre>&#39;django_react.settings&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SHORT_DATETIME_FORMAT</td>\n          <td class=\"code\"><pre>&#39;m/d/Y P&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SHORT_DATE_FORMAT</td>\n          <td class=\"code\"><pre>&#39;m/d/Y&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SIGNING_BACKEND</td>\n          <td class=\"code\"><pre>&#39;django.core.signing.TimestampSigner&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>SILENCED_SYSTEM_CHECKS</td>\n          <td class=\"code\"><pre>[]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>STATICFILES_DIRS</td>\n          <td class=\"code\"><pre>[]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>STATICFILES_FINDERS</td>\n          <td class=\"code\"><pre>[&#39;django.contrib.staticfiles.finders.FileSystemFinder&#39;,\n &#39;django.contrib.staticfiles.finders.AppDirectoriesFinder&#39;]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>STATICFILES_STORAGE</td>\n          <td class=\"code\"><pre>&#39;django.contrib.staticfiles.storage.StaticFilesStorage&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>STATIC_ROOT</td>\n          <td class=\"code\"><pre>None</pre></td>\n        </tr>\n      \n        <tr>\n          <td>STATIC_URL</td>\n          <td class=\"code\"><pre>&#39;/static/&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>TEMPLATES</td>\n          <td class=\"code\"><pre>[{&#39;APP_DIRS&#39;: True,\n  &#39;BACKEND&#39;: &#39;django.template.backends.django.DjangoTemplates&#39;,\n  &#39;DIRS&#39;: [],\n  &#39;OPTIONS&#39;: {&#39;context_processors&#39;: [&#39;django.template.context_processors.debug&#39;,\n                                     &#39;django.template.context_processors.request&#39;,\n                                     &#39;django.contrib.auth.context_processors.auth&#39;,\n                                     &#39;django.contrib.messages.context_processors.messages&#39;]}}]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>TEST_NON_SERIALIZED_APPS</td>\n          <td class=\"code\"><pre>[]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>TEST_RUNNER</td>\n          <td class=\"code\"><pre>&#39;django.test.runner.DiscoverRunner&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>THOUSAND_SEPARATOR</td>\n          <td class=\"code\"><pre>&#39;,&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>TIME_FORMAT</td>\n          <td class=\"code\"><pre>&#39;P&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>TIME_INPUT_FORMATS</td>\n          <td class=\"code\"><pre>[&#39;%H:%M:%S&#39;, &#39;%H:%M:%S.%f&#39;, &#39;%H:%M&#39;]</pre></td>\n        </tr>\n      \n        <tr>\n          <td>TIME_ZONE</td>\n          <td class=\"code\"><pre>&#39;Asia/Beirut&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>USE_ETAGS</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>USE_I18N</td>\n          <td class=\"code\"><pre>True</pre></td>\n        </tr>\n      \n        <tr>\n          <td>USE_L10N</td>\n          <td class=\"code\"><pre>True</pre></td>\n        </tr>\n      \n        <tr>\n          <td>USE_THOUSAND_SEPARATOR</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>USE_TZ</td>\n          <td class=\"code\"><pre>True</pre></td>\n        </tr>\n      \n        <tr>\n          <td>USE_X_FORWARDED_HOST</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>USE_X_FORWARDED_PORT</td>\n          <td class=\"code\"><pre>False</pre></td>\n        </tr>\n      \n        <tr>\n          <td>WSGI_APPLICATION</td>\n          <td class=\"code\"><pre>&#39;django_react.wsgi.application&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>X_FRAME_OPTIONS</td>\n          <td class=\"code\"><pre>&#39;SAMEORIGIN&#39;</pre></td>\n        </tr>\n      \n        <tr>\n          <td>YEAR_MONTH_FORMAT</td>\n          <td class=\"code\"><pre>&#39;F Y&#39;</pre></td>\n        </tr>\n      \n    </tbody>\n  </table>\n\n</div>\n\n  <div id=\"explanation\">\n    <p>\n      You're seeing this error because you have <code>DEBUG = True</code> in your\n      Django settings file. Change that to <code>False</code>, and Django will\n      display a standard page generated by the handler for this status code.\n    </p>\n  </div>\n\n</body>\n</html>\n",
-			"file": "django_react/resp.html",
-			"file_size": 55091,
-			"file_write_time": 131426059800505026,
-			"settings":
-			{
-				"buffer_size": 55090,
+				"buffer_size": 628,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -364,10 +352,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 132.0,
-		"last_filter": "",
+		"height": 52.0,
+		"last_filter": "docker",
 		"selected_items":
 		[
+			[
+				"docker",
+				"Set Syntax: Dockerfile"
+			],
 			[
 				"edit",
 				"Project: Edit Project"
@@ -552,6 +544,13 @@
 	],
 	"file_history":
 	[
+		"/home/rawad/projects/test.py",
+		"/home/rawad/projects/django-react/django_react/django_react/settings.py",
+		"/home/rawad/projects/django-react/django_react/core/views.py",
+		"/home/rawad/projects/django-react/entrypoint.sh",
+		"/home/rawad/Personal/files/pass.txt",
+		"/home/rawad/projects/django-react/django_react/resp.html",
+		"/home/rawad/.byobu/profile.tmux",
 		"/home/rawad/.bashrc",
 		"/home/rawad/.byobu/.screenrc",
 		"/home/rawad/projects/django-react/curl test.sh",
@@ -559,11 +558,9 @@
 		"/home/rawad/projects/django-node-react/installation.sh",
 		"/home/rawad/projects/django-react/django_react/django_react/local_settings.py",
 		"/home/rawad/projects/django-react/client/package.json",
-		"/home/rawad/projects/django-react/django_react/django_react/settings.py",
 		"/home/rawad/projects/django-react/django_react/core/models.py",
 		"/home/rawad/projects/django-react/client/public/index.html",
 		"/home/rawad/projects/django-react/client/src/components/UsersList.jsx",
-		"/home/rawad/projects/django-react/django_react/core/views.py",
 		"/home/rawad/projects/django-react/client/src/index.js",
 		"/home/rawad/projects/django-react/Dockerfile",
 		"/home/rawad/projects/django-react/django_react/core/admin.py",
@@ -571,7 +568,6 @@
 		"/home/rawad/projects/django-react/project/tests/base.py",
 		"/home/rawad/projects/django-react/project/api/views.py",
 		"/dev/shm/byobu-rawad-iTlo3YYI/printscreen",
-		"/home/rawad/Personal/files/pass.txt",
 		"/home/rawad/projects/django-react/client/src/components/AddUser.jsx",
 		"/home/rawad/projects/django-react/urls.py",
 		"/home/rawad/projects/django-react/django_react/django_react/urls.py",
@@ -688,6 +684,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"static",
+			"base",
+			"txt",
+			"links",
 			"color",
 			"term",
 			"color",
@@ -811,11 +811,7 @@
 			"u",
 			"models",
 			"form",
-			"input",
-			"label",
-			"<input",
-			"label",
-			"user"
+			"input"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -839,60 +835,34 @@
 			[
 				{
 					"buffer": 0,
-					"file": "django_react/core/views.py",
+					"file": "entrypoint.sh",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2000,
+						"buffer_size": 77,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1669,
-								1669
+								10,
+								10
 							]
 						],
 						"settings":
 						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": ".",
-									"selector": "source.python - string - comment - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								}
-							],
 							"bracket_highlighter.busy": false,
 							"bracket_highlighter.locations":
 							{
 								"close":
 								{
-									"1":
-									[
-										1773,
-										1774
-									]
 								},
 								"icon":
 								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/curly_bracket.png",
-										"brackethighlighter.default"
-									]
 								},
 								"open":
 								{
-									"1":
-									[
-										1626,
-										1627
-									]
 								},
 								"unmatched":
 								{
@@ -900,46 +870,16 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -950,558 +890,43 @@
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content"
-							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (Flake8Lint).tmTheme",
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 518.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "django_react/django_react/settings.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3345,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								932,
-								932
-							]
-						],
-						"settings":
-						{
-							"auto_complete_triggers":
-							[
-								{
-									"characters": ".",
-									"selector": "source.python - string - comment - constant.numeric"
-								},
-								{
-									"characters": ".",
-									"selector": "source.python - string - constant.numeric"
-								}
-							],
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										952,
-										953
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/square_bracket.png",
-										"brackethighlighter.default"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										839,
-										840
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
-							],
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/home/rawad/.byobu/profile.tmux",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 47,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								47,
-								47
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
-								"bh_curly_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
+								"bh_curly_content"
 							],
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/home/rawad/.bashrc",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4160,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4038,
-								4038
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content"
-							],
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2420.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "docker-compose.yml",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1533,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1320,
-								1320
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content"
-							],
-							"syntax": "Packages/YAML/YAML.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 528.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "Dockerfile",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 401,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								374,
-								374
-							]
-						],
-						"settings":
-						{
-							"bracket_highlighter.busy": false,
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-								},
-								"icon":
-								{
-								},
-								"open":
-								{
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content"
-							],
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1511,12 +936,116 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "django_react/resp.html",
+					"buffer": 1,
+					"file": "docker-compose.yml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 55090,
+						"buffer_size": 1776,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1245,
+								1254
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
+							],
+							"syntax": "Packages/YAML/YAML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 650.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "django_react/django_react/settings.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3345,
 						"regions":
 						{
 						},
@@ -1543,85 +1072,285 @@
 								},
 								"unmatched":
 								{
-									"1":
-									[
-										370,
-										371
-									]
 								}
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
-								"bh_angle_content"
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
 							],
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (Flake8Lint).tmTheme",
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 2,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 3,
+					"file": "django_react/core/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2000,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Dockerfile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 628,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								224,
+								224
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content"
+							],
+							"syntax": "Packages/Dockerfile Syntax Highlighting/Syntaxes/Dockerfile.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
 					"file": "client/src/index.js",
 					"semi_transient": false,
 					"settings":
@@ -1657,41 +1386,6 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -1702,16 +1396,51 @@
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content"
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
 							],
 							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (Flake8Lint).tmTheme",
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
@@ -1722,11 +1451,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 6,
 					"file": "django_react/core/urls.py",
 					"semi_transient": false,
 					"settings":
@@ -1788,41 +1517,6 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -1833,16 +1527,51 @@
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content"
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
 							],
 							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (Flake8Lint).tmTheme",
 							"syntax": "Packages/Python/Python.sublime-syntax"
@@ -1910,6 +1639,30 @@
 		"selected_items":
 		[
 			[
+				"views",
+				"django_react/core/views.py"
+			],
+			[
+				"settigns",
+				"django_react/django_react/settings.py"
+			],
+			[
+				"settings",
+				"django_react/django_react/settings.py"
+			],
+			[
+				"ent",
+				"entrypoint.sh"
+			],
+			[
+				"entry",
+				"entrypoint.sh"
+			],
+			[
+				"docker",
+				"docker-compose.yml"
+			],
+			[
 				"dockerfi",
 				"Dockerfile"
 			],
@@ -1934,15 +1687,7 @@
 				"django_react/core/views.py"
 			],
 			[
-				"docker",
-				"docker-compose.yml"
-			],
-			[
 				"settin",
-				"django_react/django_react/settings.py"
-			],
-			[
-				"settings",
 				"django_react/django_react/settings.py"
 			],
 			[
@@ -1960,10 +1705,6 @@
 			[
 				"urls",
 				"django_react/core/urls.py"
-			],
-			[
-				"views",
-				"django_react/core/views.py"
 			],
 			[
 				"config",

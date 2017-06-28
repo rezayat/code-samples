@@ -54,7 +54,7 @@ class UserView(View):
             return JsonResponse(data)
 
         except Exception as e:
-            raise
+            raise e
         else:
             pass
         finally:
