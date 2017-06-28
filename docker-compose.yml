@@ -15,11 +15,8 @@ services:
 
   users-service:
     container_name: users-service
-    command: gunicorn -b 0.0.0.0:5000 django_react.wsgi:application
+    command: gunicorn -b 0.0.0.0:5000 backend.wsgi:application
     build: ./
-    volumes:
-      - ./django_react:/usr/src/app/django_react
-      - ./client:/usr/src/app/client
     ports:
       - 5000:5000
     environment:
@@ -34,9 +31,7 @@ services:
 
   web-service:
     container_name: web-service
-    build: ./client/
-    # build:
-      # context: https://github.com/realpython/flask-microservices-client.git
+    build: ./frontend/
     environment:
       - NODE_ENV=development
       - REACT_APP_USERS_SERVICE_URL=0.0.0.0
@@ -50,7 +45,7 @@ services:
 
   nginx:
     container_name: nginx
-    build: ./web-server/nginx/
+    build: ./webserver/nginx/
     restart: always
     ports:
       - 80:80

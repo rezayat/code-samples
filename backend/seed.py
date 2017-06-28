@@ -1,6 +1,6 @@
 import os
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'django_react.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'backend.settings'
 
 import django
 django.setup()
