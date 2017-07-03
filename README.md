@@ -4,3 +4,10 @@ This is a folder full of example projects using react and django. These are open
 
 - [drf-react](https://github.com/geezhawk/drf-react): a very simple example. Start here.
 - [plain-react](https://testdriven.io): test driven development course adapted for plain django (none-rest)
+
+# IMPRTANT: These don't Work
+
+The following don't work and are just here for demo purpose:
+
+- docker-react-redux-boilerplate
+- redux-in-docker
