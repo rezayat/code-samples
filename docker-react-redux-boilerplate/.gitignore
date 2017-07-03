@@ -1,0 +1,11 @@
+# Ignore
+/node_modules
+.npm-debug*
+npm-debug*
+/dist/*.js
+/dist/*.css
+/dist/static/
+/dist/index.html
+
+# Remove this line if you want to update the yarn.lock
+yarn.lock
