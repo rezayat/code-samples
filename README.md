@@ -1,4 +1,4 @@
-# ReactJS + Django Demos
+# ReactJS Demos
 
 This is a folder full of example projects using react and django. These are open source projects that are typically modified from pre-existing examples on the web.
 
