@@ -1,0 +1,61 @@
+version: '2.1'
+
+services:
+
+  database:
+    container_name: database
+    build: ./database
+    expose:
+      - "5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=users_dev
+      - POSTGRES_PORT=5432
+    healthcheck:
+      test: exit 0
+
+  backend:
+    # prest
+    container_name: backend
+    build: ./backend
+    environment:
+        - PREST_DEBUG=true
+        - PREST_CONF=./config.toml
+        - PREST_PG_HOST=database
+        - PREST_PG_USER=postgres
+        - PREST_PG_PASS=postgres
+        - PREST_PG_DATABASE=users_dev
+        - PREST_PG_PORT=5432
+    expose:
+      - "3000"
+    depends_on:
+      database:
+        condition: service_healthy
+    links:
+      - database
+
+  frontend:
+    # react
+    container_name: frontend
+    build: ./frontend
+    environment:
+      - NODE_ENV=development
+      # - REACT_APP_USERS_SERVICE_URL=http://localhost:1234/api/users_dev/public
+    expose:
+      - "5000"
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    restart: always
+    ports:
+      - "1234:1234"
+    depends_on:
+      backend:
+        condition: service_started
+      frontend:
+        condition: service_started
+    links:
+      - frontend
+      - backend

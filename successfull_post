@@ -1,0 +1,1 @@
+curl -H "Content-Type: application/json" -X POST -d '{"username":"dsnehu","email":"dhif@iehu.ichu","active":true,"created_at":"2017-1-1 8:38:12"}' http://localhost:1234/api/users_dev/public/users
