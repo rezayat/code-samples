@@ -17,7 +17,7 @@ RUN npm install -g serve
 # add app
 # add environment variables
 ARG NODE_ENV
-ARG REACT_APP_USERS_SERVICE_URL=http://localhost:1234/api/users_dev/public
+ARG REACT_APP_USERS_SERVICE_URL=/api/users_dev/public
 
 ENV NODE_ENV=$NODE_ENV
 ENV REACT_APP_USERS_SERVICE_URL=$REACT_APP_USERS_SERVICE_URL

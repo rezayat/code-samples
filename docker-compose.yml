@@ -44,6 +44,8 @@ services:
       # - REACT_APP_USERS_SERVICE_URL=http://localhost:1234/api/users_dev/public
     expose:
       - "5000"
+    # links:
+    #   - nginx
 
   nginx:
     container_name: nginx
