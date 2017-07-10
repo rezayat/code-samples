@@ -25,5 +25,12 @@ yarn-error.log*
 # editors
 *.sublime-*
 
+# files
 running.html
 README.html
+http_auth.txt
+jwt_auth.txt
+
+# directories
+/backend/keys/
+

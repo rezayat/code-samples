@@ -22,7 +22,16 @@ class App extends Component {
     console.log(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`);
     
     // axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users/`)
-    axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`)
+    axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, {
+            headers: {
+                'accept': 'application/json',
+
+            // hard-coded token which should be generated on User's login
+            // can generate any token, using the secret key "not_secret_at_all"
+                'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNzYyODk2Mzk4IiwibmFtZSI6IlJhd2FkIEdoeiJ9.KmLBqe3NsGX2VHHJ2J8MVd3fxTn1i6GLAnNOLIWI8cY',
+                'accept-language': 'en_US',
+                'content-type': 'application/x-www-form-urlencoded'
+            }})
     .then((res) => { this.setState({ users: res.data }); })
     .catch((err) => { console.log(err); })
   }
@@ -36,7 +45,16 @@ class App extends Component {
     }
 
     // axios.post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users/`, data)
-    axios.post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, data)
+    axios.post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, data, {
+            headers: {
+                'accept': 'application/json',
+
+            // hard-coded token which should be generated on User's login
+            // can generate any token, using the secret key "not_secret_at_all"
+                'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNzYyODk2Mzk4IiwibmFtZSI6IlJhd2FkIEdoeiJ9.KmLBqe3NsGX2VHHJ2J8MVd3fxTn1i6GLAnNOLIWI8cY',
+                'accept-language': 'en_US',
+                'content-type': 'application/x-www-form-urlencoded'
+            }})
     .then((res) => {
       this.getUsers();
       this.setState({ username: '' });

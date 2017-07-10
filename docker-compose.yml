@@ -20,13 +20,8 @@ services:
     container_name: backend
     build: ./backend
     environment:
-        - PREST_DEBUG=true
+        - PREST_DEBUG=false # so that jwt in prest works :D
         - PREST_CONF=./config.toml
-        - PREST_PG_HOST=database
-        - PREST_PG_USER=postgres
-        - PREST_PG_PASS=postgres
-        - PREST_PG_DATABASE=users_dev
-        - PREST_PG_PORT=5432
     expose:
       - "3000"
     depends_on:
@@ -44,8 +39,6 @@ services:
       # - REACT_APP_USERS_SERVICE_URL=http://localhost:1234/api/users_dev/public
     expose:
       - "5000"
-    # links:
-    #   - nginx
 
   nginx:
     container_name: nginx
