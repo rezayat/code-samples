@@ -16,11 +16,10 @@ services:
       test: exit 0
 
   backend:
-    # prest
     container_name: backend
     build: ./backend
     environment:
-        - PREST_DEBUG=false # so that jwt in prest works :D
+        - PREST_DEBUG=false # Enables JWT
         - PREST_CONF=./config.toml
     expose:
       - "3000"
@@ -36,7 +35,6 @@ services:
     build: ./frontend
     environment:
       - NODE_ENV=development
-      # - REACT_APP_USERS_SERVICE_URL=http://localhost:1234/api/users_dev/public
     expose:
       - "5000"
 
