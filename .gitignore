@@ -10,6 +10,7 @@ initialize_project.sh
 test_docker.sh
 docker_versions.sh
 restart_users-service.sh
+env
 
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
@@ -35,3 +36,10 @@ yarn-error.log*
 
 # editors
 *.sublime-*
+
+# files
+http_auth.txt
+jwt_auth.txt
+
+# directories
+/backend/keys/
