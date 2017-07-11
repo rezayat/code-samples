@@ -1,16 +1,29 @@
-# react-prest
+# prest-react
 
-## Building the project
-docker-compose build
+A proof of concept stack with react as a frontend and prest wrapping a postgres database and exposing a schema as endpoint. Authorization is done as JWT with tokens
+placed in client explicitly. (until custom endpoint is added or other)
 
-## Run project
-docker-compose up
+## How to run
 
-## Accessing the project
+```
+$ docker-compose build
+$ docker-compose up
+$ python -m webbrowser http://localhost:1234/
+```
 
-application        : http://localhost:1234/ (Public)
-prest api users    : http://localhost:1234/api/users_dev/public/users (JWT Enabled)
+*Note:* API URL: http://localhost:1234/api/users_dev/public/users (JWT Enabled)
 
+## Infrastructure
+
+The current configuration allows for a containerized application that uses the following architecture:
+
+```
+    Webserver(Nginx)
+        == Reverse Proxy =>
+            :1234/ ==> Frontend:5000 (Pushstate Server)
+            :1234/api/ ==> Backend:3000 (prest)
+                ==> Db:5432 (Postgres)
+```
 
 ## JWT Authorization
 
