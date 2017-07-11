@@ -1,12 +1,9 @@
 FROM golang:1.7-alpine
 
-RUN apk update
-RUN apk add curl git
+RUN mkdir -p /opt/go
+COPY ./prest /usr/bin
+COPY ./config.toml /opt/go
 
-RUN mkdir -p /go/src/github.com/nuveo/prest
-COPY  ./ /go/src/github.com/nuveo/prest
+WORKDIR /opt/go
 
-WORKDIR /go/src/github.com/nuveo/prest
-
-RUN go install
 CMD ["prest"]

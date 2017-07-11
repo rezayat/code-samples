@@ -19,7 +19,7 @@ services:
     container_name: backend
     build: ./backend
     environment:
-        - PREST_DEBUG=false # Enables JWT
+        - PREST_DEBUG=false  # Enables JWT
         - PREST_CONF=./config.toml
     expose:
       - "3000"
