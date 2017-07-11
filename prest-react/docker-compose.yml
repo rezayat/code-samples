@@ -38,6 +38,15 @@ services:
     expose:
       - "5000"
 
+  app:
+    container_name: app
+    build: ./app
+    ports:
+      - "4000:4000"
+    # depends_on:
+    #   backend:
+    #     condition: service_started
+
   nginx:
     container_name: nginx
     build: ./nginx
@@ -52,3 +61,4 @@ services:
     links:
       - frontend
       - backend
+      - app
