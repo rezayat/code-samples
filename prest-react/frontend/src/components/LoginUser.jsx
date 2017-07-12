@@ -1,37 +1,35 @@
 import React from 'react';
 
-const AddUser = (props) => {
+const LoginUser = (props) => {
   return (
-    <form onSubmit={ (event) => props.addUser(event) }>
+    <form onSubmit={ (event) => props.login(event) }>
       <div className="form-group">
         <input
           name="username"
           className="form-control input-lg"
           type="text"
-          placeholder="Enter a username"
+          placeholder="Username"
           required
-          value={props.username}
           onChange={props.handleChange}
         />
       </div>
       <div className="form-group">
         <input
-          name="email"
+          name="password"
           className="form-control input-lg"
-          type="email"
-          placeholder="Enter an email address"
+          type="password"
+          placeholder="Password"
           required
-          value={props.email}
           onChange={props.handleChange}
         />
       </div>
       <input
         type="submit"
         className="btn btn-primary btn-lg btn-block"
-        value="Add User"
+        value="Login"
       />
     </form>
   )
 }
 
-export default AddUser;
+export default LoginUser;
