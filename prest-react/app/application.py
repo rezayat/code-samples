@@ -12,41 +12,17 @@ users = {
         "full_name": 'administrator',
         "password": '123456789',
     },
-    "rawad": {
+    "omar": {
         "userid": 2,
+        "username": 'omar',
+        "full_name": 'omarov omkov',
+        "password": '987654321',
+    },
+    "rawad": {
+        "userid": 3,
         "username": 'rawad',
         "full_name": 'rawadov rakov',
-        "password": '123456789',
-    },
-    "jawad": {
-        "userid": 3,
-        "username": 'jawad',
-        "full_name": 'jawadov jakov',
-        "password": '123456789',
-    },
-    "ziad": {
-        "userid": 4,
-        "username": 'ziad',
-        "full_name": 'ziadov zikov',
-        "password": '123456789',
-    },
-    "iyad": {
-        "userid": 5,
-        "username": 'iyad',
-        "full_name": 'iyadov iykov',
-        "password": '123456789',
-    },
-    "imad": {
-        "userid": 5,
-        "username": 'imad',
-        "full_name": 'imadov imkov',
-        "password": '123456789',
-    },
-    "jihad": {
-        "userid": 5,
-        "username": 'jihad',
-        "full_name": 'jihadov jikov',
-        "password": '123456789',
+        "password": '123456',
     },
 }
 
