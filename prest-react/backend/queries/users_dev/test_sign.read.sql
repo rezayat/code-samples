@@ -1,0 +1,1 @@
+select sign('{"sub":"1234567890","name":"John Doe","admin":true}', 'secret')
