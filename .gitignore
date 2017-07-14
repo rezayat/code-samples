@@ -40,6 +40,10 @@ yarn-error.log*
 # files
 http_auth.txt
 jwt_auth.txt
+prest-react/backend/local_config.toml
+prest-react/backend/local_prest
+prest-react/nginx_local.conf
+prest-react/run_local.md
 
 # directories
 /backend/keys/
