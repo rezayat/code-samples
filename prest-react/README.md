@@ -95,12 +95,9 @@ All PRest services work well **provided an authorization token** _however:_
 
 ```bash
 $ curl -L http://localhost:1234/api/_QUERIES/users_dev/test_sign
-```
-**
-``` bash
 "error": "Required authorization token not found" 
 ```
-**
+**FAILS !!**
 
 **HENCE**
 _You just need an authorization token in order to get an authorization token :( !!_
