@@ -7,7 +7,7 @@ key = "not_secret_at_all"
 # eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNzYyODk2Mzk4IiwibmFtZSI6IlJhd2FkIEdoeiJ9.KmLBqe3NsGX2VHHJ2J8MVd3fxTn1i6GLAnNOLIWI8cY
 
 [queries]
-location = "./queries/"
+location = "/srv/queries/"
 
 [pg]
 host = "database"

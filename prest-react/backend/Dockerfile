@@ -1,10 +1,10 @@
-FROM golang:1.7-alpine
+FROM bitnami/minideb:latest
 
-RUN mkdir -p /opt/go
-COPY ./alpine_prest /usr/bin
-# COPY ./config.toml /opt/go
-ADD . /opt/go/
+RUN mkdir -p /srv/queries
 
-WORKDIR /opt/go
+COPY ./config.toml ./prest /srv/
+COPY ./queries/ /srv/queries/
 
-CMD ["alpine_prest"]
+RUN chmod +x /srv/prest
+
+CMD ["/srv/prest"]

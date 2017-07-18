@@ -42,6 +42,10 @@ http_auth.txt
 jwt_auth.txt
 prest-react/backend/local_config.toml
 prest-react/backend/local_prest
+prest-react/backend/prest_01
+prest-react/database/test_database.sh
+prest-react/TODOs.md
+prest-react/TODOs.html
 prest-react/nginx_local.conf
 prest-react/run_local.md
 

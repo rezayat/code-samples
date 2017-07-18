@@ -3,6 +3,7 @@ version: '2.1'
 services:
 
   database:
+    # image: postgres:alpine
     container_name: database
     build: ./database
     expose:
@@ -12,6 +13,8 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DATABASE=users_dev
       - POSTGRES_PORT=5432
+    volumes:
+      - ./database/data:/var/lib/postgresql/data/
     healthcheck:
       test: exit 0
 
@@ -20,7 +23,7 @@ services:
     build: ./backend
     environment:
         - PREST_DEBUG=false  # Enables JWT
-        - PREST_CONF=./config.toml
+        - PREST_CONF=/srv/config.toml
     expose:
       - "3000"
     depends_on:
