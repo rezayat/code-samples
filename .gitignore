@@ -42,12 +42,16 @@ http_auth.txt
 jwt_auth.txt
 prest-react/prest/local_config.toml
 prest-react/prest/local_prest
+prest-react/prest/alpine_prest
 prest-react/prest/prest_01
 prest-react/postgres/test_database.sh
+
 prest-react/TODOs.md
 prest-react/TODOs.html
 prest-react/nginx_local.conf
 prest-react/run_local.md
+prest-react/curl.md
+prest-react/curl.html
 
 # directories
 /prest/keys/
