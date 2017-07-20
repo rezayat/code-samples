@@ -2,9 +2,10 @@ version: '2.1'
 
 services:
 
-  database:
-    container_name: database
-    build: ./database
+  postgres:
+    image: postgres:alpine
+    container_name: postgres
+    build: ./postgres
     expose:
       - "5432"
     environment:
@@ -12,53 +13,64 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DATABASE=users_dev
       - POSTGRES_PORT=5432
+    volumes:
+      # - ./postgres/data:/var/lib/postgresql/data/
+      - ./postgres/create.sql:/docker-entrypoint-initdb.d/create.sql
+      - ./postgres/pgjwt.sql:/docker-entrypoint-initdb.d/pgjwt.sql
+      # - ./postgres/extension:/usr/local/share/postgresql/extension/
     healthcheck:
       test: exit 0
 
-  backend:
-    container_name: backend
-    build: ./backend
+  prest:
+    container_name: prest
+    build: ./prest
+    volumes:
+      - ./prest/config.toml:/srv/config.toml
+      - ./prest/queries/:/srv/queries/
     environment:
         - PREST_DEBUG=false  # Enables JWT
-        - PREST_CONF=./config.toml
+        - PREST_CONF=/srv/config.toml
     expose:
       - "3000"
     depends_on:
-      database:
+      postgres:
         condition: service_healthy
     links:
-      - database
+      - postgres
 
-  frontend:
+  react:
     # react
-    container_name: frontend
-    build: ./frontend
+    container_name: react
+    build: ./react
     environment:
       - NODE_ENV=development
     expose:
       - "5000"
 
-  app:
-    container_name: app
-    build: ./app
+  flask:
+    container_name: flask
+    build: ./flask
     ports:
       - "4000:4000"
     # depends_on:
-    #   backend:
+    #   prest:
     #     condition: service_started
 
   nginx:
+    image: nginx:alpine
     container_name: nginx
-    build: ./nginx
+    # build: ./nginx
     restart: always
     ports:
       - "1234:1234"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      backend:
+      prest:
         condition: service_started
-      frontend:
+      react:
         condition: service_started
     links:
-      - frontend
-      - backend
-      - app
+      - react
+      - prest
+      - flask

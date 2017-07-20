@@ -28,6 +28,8 @@ The current configuration allows for a containerized application that uses the f
 
 ## JWT Authorization
 
+### JWT in Flask
+
 Added a seperate container for handling JWT Authorization (a simple flask appliation)
 
 The flask application implements a user login mechanism that provides the **logged-in** user with an authorization token.
@@ -43,8 +45,60 @@ You can login using the following credentials:
 | omar     | 987654321 |
 | rawad    | 123456    |
 
-To test the JWT you can use curl as follows:
+To run the JWT you can use curl as follows:
 
 ``` bash
 $ curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNzYyODk2Mzk4IiwibmFtZSI6IlJhd2FkIEdoeiJ9.KmLBqe3NsGX2VHHJ2J8MVd3fxTn1i6GLAnNOLIWI8cY" localhost:1234/api/users_dev/public/users
 ```
+
+### JWT in postgres as (sign)
+
+Added pgsign postgres extension to the containerized postgres installation
+
+#### To run _pgsign_ (while containers are up):
+
+```bash
+$ docker exec -ti database bash
+# psql -U postgres users_dev
+postgres=# select sign('{"sub":"1234567890","name":"John Doe","admin":true}', 'secret');
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lI....
+
+```
+
+In order to call "sign" from PRest, **PRest queries** are used
+
+#### To run PRest Queries
+
+PRest queries are stored in files:
+
+ ./queries_directory/directory/select_example.read.sql
+
+**Example Query Files:**
+ ./queries/users_dev/test_select.read.sql
+ ./queries/users_dev/test_sign.read.sql
+
+**Run Queries:**
+
+```bash
+$ curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNzYyODk2Mzk4IiwibmFtZSI6IlJhd2FkIEdoeiJ9.KmLBqe3NsGX2VHHJ2J8MVd3fxTn1i6GLAnNOLIWI8cY" -L http://localhost:1234/api/_QUERIES/users_dev/test_select
+[{"id":1,"username":"test_user","email":"test.user@gmail.com","active":true,"created_at":"2017-06-07T01:23:45"}]
+```
+
+```bash
+$ curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzNzYyODk2Mzk4IiwibmFtZSI6IlJhd2FkIEdoeiJ9.KmLBqe3NsGX2VHHJ2J8MVd3fxTn1i6GLAnNOLIWI8cY" -L http://localhost:1234/api/_QUERIES/users_dev/test_sign
+[{"sign":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA....
+```
+
+All PRest services work well **provided an authorization token** _however:_
+
+#### To get an authorization token via PRest (when you have no one yet):
+
+```bash
+$ curl -L http://localhost:1234/api/_QUERIES/users_dev/test_sign
+"error": "Required authorization token not found" 
+```
+**FAILS !!**
+
+**HENCE**
+_You just need an authorization token in order to get an authorization token :( !!_
+
