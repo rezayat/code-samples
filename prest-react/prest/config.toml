@@ -10,7 +10,7 @@ key = "not_secret_at_all"
 location = "/srv/queries/"
 
 [pg]
-host = "database"
+host = "postgres"
 user = "postgres"
 pass = "postgres"
 database = "users_dev"
