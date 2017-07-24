@@ -6,7 +6,7 @@ This is a folder full of example projects using react and django. These are open
 - [plain-react](https://testdriven.io): test driven development course adapted for plain django (none-rest)
 - prest-react: experimental react/prest stack with explicit JWT authentication as a proof of concept.
 
-# IMPRTANT: These don't Work
+# IMPORTANT: These don't Work
 
 The following don't work and are just here for demo purpose:
 
