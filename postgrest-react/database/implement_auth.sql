@@ -1,5 +1,7 @@
 \connect earth
 
+-- JWT Extensions related
+
 ALTER DATABASE earth SET "app.jwt_secret" TO 'not_secret_at_all';
 
 CREATE SCHEMA if not exists basic_auth;
@@ -26,22 +28,7 @@ SELECT sign(
   ) r;
 $$;
 
-
-
-CREATE OR REPLACE FUNCTION get_current_user() RETURNS text
-  LANGUAGE sql
-    AS 
-    $$
-        select current_user::text;
-    $$;
-
-CREATE OR REPLACE FUNCTION add_them(a integer, b integer)
-RETURNS integer AS $$
-SELECT $1 + $2;
-$$ LANGUAGE SQL IMMUTABLE STRICT;
-
-
--- curl -X POST -H 'Content-Type: application/json' -d '{"a":12,"b":734}' http://localhost:3000/rpc/add_them
+-- USER auth support
 
 CREATE TABLE if not exists
 basic_auth.users (
@@ -131,6 +118,7 @@ end;
 $$;
 
 
+-- Add fixtures
 
 create role anon;
 create role authenticator noinherit;
@@ -143,4 +131,3 @@ insert into basic_auth.users values ('rawad@gmail.com','123456','postgres');
 grant usage on schema public, basic_auth to anon;
 grant select on table pg_authid, basic_auth.users to anon;
 grant execute on function login(text,text) to anon;
-

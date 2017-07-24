@@ -1,8 +1,9 @@
 # postgrest-react
 
 A proof of concept stack with **postgrest** wrapping a postgres database and exposing schema "public" as an endpoint.
- - **Authentication** is implemented on the database level via schema "basic_auth" using table 'users' and function 'login()' to store and authenticate users.
- - **Authorization** is implemented on the database level via schema "basic_auth" using function 'sign()' to generate JWT tokens.
+
+- **Authentication** is implemented on the database level via schema `basic_auth` using table `USERS` and function `login()` to store and authenticate users.
+- **Authorization** is implemented on the database level via schema `basic_auth` using function 'sign()' to generate JWT tokens.
 
 ## How to run
 
@@ -27,15 +28,8 @@ The current configuration allows for a containerized application that uses the f
 
 ```yaml
 database: earth
-    schema: public   # main data schema
+    schema: public   # main data schema (for api access)
         table: animals
-            column: ...
-            column: ...
-        table: ...
-            column: ...
-            column: ...
-        table: ...
-            column: ...
 
     schema: basic_auth  # authentication schema
         table: users
@@ -47,9 +41,9 @@ database: earth
         function: sign
 ```
 
-## Data used
+## Fixture Data
 
-**JWT token key : 'not_secret_at_all'**
+**JWT Secret Key**: not_secret_at_all
 
 You can login using the following credentials:
 
@@ -60,37 +54,31 @@ You can login using the following credentials:
 | rawad@gmail.com    | 123456    |
 
 
-## Test login and token generating
+## Testing Authentication
 
 ```bash
-# failing logins
+# Failed Login
 
 $ curl -X POST -H 'Content-Type: application/json' -d '{"email":"rawad@gmail.com","pass":"incorrect_pass"}' http://localhost:1234/login
 $ curl -X POST -H 'Content-Type: application/json' -d '{"email":"missing@password.com"}' http://localhost:1234/login
 $ curl -X POST -H 'Content-Type: application/json' -d '{"pass":"missing_email"}' http://localhost:1234/login
-```
 
-```bash
-# successfull login
+# Successful Login
 
 $ curl -X POST -H 'Content-Type: application/json' -d '{"email":"rawad@gmail.com","pass":"123456"}' http://localhost:1234/login
 ```
 
-## Test access
+## Test Authorization
 ```bash
-# invalid jwt token
+$ curl -H 'Authorization: Bearer some.invalid.token' http://localhost:1234/api/animals
 
-$ curl -H -i 'Authorization: Bearer invalid.jwt.token' http://localhost:1234/api/animals
-```
+<< Invalid JWT Token >>
 
-```bash
-# unauthorized access
+$ curl http://localhost:1234/api/animals
 
-$ curl -i http://localhost:1234/api/animals
-```
+<< Unauthorized Access >>
 
-```bash
-# authorized access
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicG9zdGdyZXMiLCJlbWFpbCI6InJhd2FkQGdtYWlsLmNvbSIsImV4cCI6MTUwMDg5NTk4OX0.Vdud2_Gu1RMa81fyGMNonZbnEywKhd7yU2NohyaBfWs' http://localhost:1234/api/animals
 
-$ curl -H -i 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicG9zdGdyZXMiLCJlbWFpbCI6InJhd2FkQGdtYWlsLmNvbSIsImV4cCI6MTUwMDg5NTk4OX0.Vdud2_Gu1RMa81fyGMNonZbnEywKhd7yU2NohyaBfWs' http://localhost:1234/api/animals
+<< Success! >>
 ```

@@ -14,9 +14,4 @@ RUN curl -o pg.tar.xz -L https://github.com/begriffs/postgrest/releases/download
  && apt-get -y autoremove \
  && rm -rf ${HOME}/.cache /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# RUN chmod +x /srv/postgrest
-
-# CMD ["sh", "-c", "tail -f /dev/null"]
-
-# CMD ["/srv/postgrest ${POSTGREST_CONF}"]
 CMD ["/srv/postgrest","/srv/config.toml"]

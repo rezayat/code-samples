@@ -14,8 +14,7 @@ services:
       - POSTGRES_DATABASE=earth
       - POSTGRES_PORT=5432
     volumes:
-      - ./database/create.sql:/docker-entrypoint-initdb.d/00_create.sql
-      - ./database/add_extensions.sql:/docker-entrypoint-initdb.d/01_add_extensions.sql
+      - ./database/create.sql:/docker-entrypoint-initdb.d/01_create.sql
       - ./database/implement_auth.sql:/docker-entrypoint-initdb.d/02_implement_auth.sql
     healthcheck:
       test: exit 0
@@ -36,8 +35,7 @@ services:
   nginx:
     image: nginx:alpine
     container_name: nginx
-    # build: ./nginx
-    # restart: always
+    restart: always
     ports:
       - "1234:1234"
     volumes:
@@ -45,9 +43,5 @@ services:
     depends_on:
       rest:
         condition: service_started
-      # react:
-      #   condition: service_started
     links:
-      # - react
       - rest
-      # - flask
