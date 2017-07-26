@@ -6,6 +6,13 @@ import UsersList from './components/UsersList';
 import AddUser from './components/AddUser';
 import LoginUser from './components/LoginUser.jsx';
 import LogoutUser from './components/LogoutUser.jsx';
+// var querystring = require('querystring');
+
+const REACT_API_URL = process.env.REACT_API_URL || '/api';
+const REACT_AUTHORIZATION_URL = process.env.REACT_AUTHORIZATION_URL || '/login';
+
+console.log(REACT_API_URL);
+console.log(REACT_AUTHORIZATION_URL);
 
 class App extends Component {
   constructor() {
@@ -23,8 +30,6 @@ class App extends Component {
     if (this.currentState().token){
       this.getUsers();
     }
-    console.log(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`);
-    console.log(`${process.env.REACT_APP_AUTHORIZATION_URL}/users`);
   }
   currentState(){
     // deepcopy 
@@ -46,20 +51,21 @@ class App extends Component {
   }
 
   getUsers() {
-    
-    axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, {
-            headers: {
-                'accept': 'application/json',
+    var auth_token = "Bearer " + this.state.token
 
-            // hard-coded token which should be generated on User's login
-            // can generate any token, using the secret key "not_secret_at_all"
-                'authorization': this.state.token,
-                'accept-language': 'en_US',
-                'content-type': 'application/x-www-form-urlencoded'
-            }})
-    .then((res) => { this.updateState({ users: res.data }); })
+    axios.get(`${REACT_API_URL}/users`,{
+      headers:
+        {
+            'Authorization': auth_token,
+            'Content-Type': 'application/json',
+            'Accept-language': 'en_US',
+        }})
+    .then((res) => {
+      this.updateState({ users: res.data }); 
+    })
     .catch((err) => { console.log(err); })
   }
+
   addUser(event) {
     event.preventDefault();
     const data = {
@@ -68,16 +74,11 @@ class App extends Component {
       active: true,
       created_at: new Date().toLocaleString(),
     }
-
-    axios.post(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`, data, {
+    
+    axios.post(`${REACT_API_URL}/users`, data, {
             headers: {
-                'accept': 'application/json',
-
-            // hard-coded token which should be generated on User's login
-            // can generate any token, using the secret key "not_secret_at_all"
-                'authorization': this.state.token,
-                'accept-language': 'en_US',
-                'content-type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + this.state.token,
             }})
     .then((res) => {
       this.getUsers();
@@ -109,20 +110,26 @@ class App extends Component {
     event.preventDefault();
     
     const login_data = {
-      username: this.state.login_username,
-      password: this.state.login_password
+      email: this.state.login_username,
+      pass: this.state.login_password
     }
+    
+    // axios.post('http://localhost:1234/login',login_data, 
 
-    axios.post(`${process.env.REACT_APP_AUTHORIZATION_URL}/login`,login_data, {
+    axios.post(`${REACT_AUTHORIZATION_URL}`, login_data,
+          {
             headers: {
-                'accept': 'application/json'
+                'Accept': 'application/json',
+                'Content-Type': "application/json;charset=utf-8"
               }
-            })
-    .then((res) => { 
-      this.updateState({ token: res.headers['authorization']});
+            }
+            )
+    .then((res) => {
+      this.updateState({ 'token': res.data[0]["token"]});
       this.getUsers();
      })
     .catch((err) => { console.log(err); })
+
   }
   render_authorized() {
     return (

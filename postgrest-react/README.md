@@ -2,14 +2,20 @@
 
 A proof of concept stack with **postgrest** wrapping a postgres database and exposing schema "public" as an endpoint.
 
-- **Authentication** is implemented on the database level via schema `basic_auth` using table `USERS` and function `login()` to store and authenticate users.
+- **Authentication** is implemented on the database level via schema `basic_auth` using table `login_USERS` and function `login()` to store and authenticate login_users.
 - **Authorization** is implemented on the database level via schema `basic_auth` using function 'sign()' to generate JWT tokens.
+
+**React App**
+    - Authenticates users using an **HTTP POST request** to (postgrest)/rpc/login
+    - Gets users using an **HTTP GET request** to (postgrest)/api/users
+    - Adds users using an **HTTP POST request** to (postgrest)/api/users
 
 ## How to run
 
 ```bash
 $ docker-compose build
 $ docker-compose up
+$ python -m webbrowser http://localhost:1234
 ```
 
 ## Infrastructure
@@ -30,9 +36,10 @@ The current configuration allows for a containerized application that uses the f
 database: earth
     schema: public   # main data schema (for api access)
         table: animals
+        table: users
 
     schema: basic_auth  # authentication schema
-        table: users
+        table: login_users
             column: email
             column: pass
             column: role
@@ -53,7 +60,6 @@ You can login using the following credentials:
 | omar@gmail.com     | 987654321 |
 | rawad@gmail.com    | 123456    |
 
-
 ## Testing Authentication
 
 ```bash
@@ -69,6 +75,7 @@ $ curl -X POST -H 'Content-Type: application/json' -d '{"email":"rawad@gmail.com
 ```
 
 ## Test Authorization
+
 ```bash
 $ curl -H 'Authorization: Bearer some.invalid.token' http://localhost:1234/api/animals
 

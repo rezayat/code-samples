@@ -31,7 +31,7 @@ $$;
 -- USER auth support
 
 CREATE TABLE if not exists
-basic_auth.users (
+basic_auth.login_users (
   email    text primary key check ( email ~* '^.+@.+\..+$' ),
   pass     text not null check (length(pass) < 512),
   role     name not null check (length(role) < 512)
@@ -52,9 +52,9 @@ begin
 end
 $$;
 
-drop trigger if exists ensure_user_role_exists on basic_auth.users;
+drop trigger if exists ensure_user_role_exists on basic_auth.login_users;
 create constraint trigger ensure_user_role_exists
-  after insert or update on basic_auth.users
+  after insert or update on basic_auth.login_users
   for each row
   execute procedure basic_auth.check_role_exists();
 
@@ -72,9 +72,9 @@ create constraint trigger ensure_user_role_exists
   end
   $$;
 
-  drop trigger if exists encrypt_pass on basic_auth.users;
+  drop trigger if exists encrypt_pass on basic_auth.login_users;
   create trigger encrypt_pass
-    before insert or update on basic_auth.users
+    before insert or update on basic_auth.login_users
     for each row
     execute procedure basic_auth.encrypt_pass();
 
@@ -84,9 +84,9 @@ basic_auth.user_role(email text, pass text) returns name
   as $$
 begin
   return (
-  select role from basic_auth.users
-   where users.email = user_role.email
-     and users.pass = crypt(user_role.pass, users.pass)
+  select role from basic_auth.login_users u
+   where u.email = user_role.email
+     and u.pass = crypt(user_role.pass, u.pass)
   );
 end;
 $$;
@@ -124,10 +124,10 @@ create role anon;
 create role authenticator noinherit;
 grant anon to authenticator;
 
-insert into basic_auth.users values ('admin@gmail.com','123456789','postgres');
-insert into basic_auth.users values ('omar@gmail.com','987654321','postgres');
-insert into basic_auth.users values ('rawad@gmail.com','123456','postgres');
+insert into basic_auth.login_users values ('admin@gmail.com','123456789','postgres');
+insert into basic_auth.login_users values ('omar@gmail.com','987654321','postgres');
+insert into basic_auth.login_users values ('rawad@gmail.com','123456','postgres');
 
 grant usage on schema public, basic_auth to anon;
-grant select on table pg_authid, basic_auth.users to anon;
+grant select on table pg_authid, basic_auth.login_users to anon;
 grant execute on function login(text,text) to anon;
