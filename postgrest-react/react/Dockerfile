@@ -13,16 +13,11 @@ ADD package.json /usr/src/app/package.json
 RUN npm install
 RUN npm install -g serve
 
-# add app
 # add environment variables
 
-# ARG NODE_ENV=development
-# ARG REACT_API_URL=/api
-# ARG REACT_AUTHORIZATION_URL=/rpc
-
-ARG NODE_ENV
-ARG REACT_API_URL
-ARG REACT_AUTHORIZATION_URL
+ARG NODE_ENV=development
+ARG REACT_API_URL=/api
+ARG REACT_AUTHORIZATION_URL=/rpc
 
 ENV NODE_ENV=$NODE_ENV
 ENV REACT_API_URL=$REACT_API_URL

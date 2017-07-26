@@ -3,7 +3,6 @@ version: '2.1'
 services:
 
   database:
-    image: postgres:alpine
     container_name: database
     build: ./database
     expose:
@@ -24,10 +23,10 @@ services:
     build: ./rest
     volumes:
       - ./rest/config.toml:/srv/config.toml
-    # expose:
-    #   - "3000"
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
+    # ports:
+    #   - "3000:3000"
     depends_on:
       database:
         condition: service_healthy
@@ -37,10 +36,10 @@ services:
   react:
     container_name: react
     build: ./react
-    # environment:
-    #   - NODE_ENV=development
-    #   - REACT_API_URL=/api
-    #   - REACT_AUTHORIZATION_URL=/rpc
+    environment:
+      - NODE_ENV=development
+      - REACT_API_URL=/api
+      - REACT_AUTHORIZATION_URL=/rpc
     expose:
       - "5000"
 

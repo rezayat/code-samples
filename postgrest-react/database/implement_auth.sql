@@ -58,8 +58,6 @@ create constraint trigger ensure_user_role_exists
   for each row
   execute procedure basic_auth.check_role_exists();
 
-  create extension if not exists pgcrypto;
-
   CREATE OR REPLACE FUNCTION
   basic_auth.encrypt_pass() returns trigger
     language plpgsql

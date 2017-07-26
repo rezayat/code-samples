@@ -6,9 +6,9 @@ A proof of concept stack with **postgrest** wrapping a postgres database and exp
 - **Authorization** is implemented on the database level via schema `basic_auth` using function 'sign()' to generate JWT tokens.
 
 **React App**
-    - Authenticates users using an **HTTP POST request** to (postgrest)/rpc/login
-    - Gets users using an **HTTP GET request** to (postgrest)/api/users
-    - Adds users using an **HTTP POST request** to (postgrest)/api/users
+- Authenticates users using an **HTTP POST request** to (postgrest)/rpc/login
+- Gets users using an **HTTP GET request** to (postgrest)/users
+- Adds users using an **HTTP POST request** to (postgrest)/users
 
 ## How to run
 
@@ -35,7 +35,6 @@ The current configuration allows for a containerized application that uses the f
 ```yaml
 database: earth
     schema: public   # main data schema (for api access)
-        table: animals
         table: users
 
     schema: basic_auth  # authentication schema
@@ -77,15 +76,15 @@ $ curl -X POST -H 'Content-Type: application/json' -d '{"email":"rawad@gmail.com
 ## Test Authorization
 
 ```bash
-$ curl -H 'Authorization: Bearer some.invalid.token' http://localhost:1234/api/animals
+$ curl -H 'Authorization: Bearer some.invalid.token' http://localhost:1234/api/users
 
 << Invalid JWT Token >>
 
-$ curl http://localhost:1234/api/animals
+$ curl http://localhost:1234/api/users
 
 << Unauthorized Access >>
 
-$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicG9zdGdyZXMiLCJlbWFpbCI6InJhd2FkQGdtYWlsLmNvbSIsImV4cCI6MTUwMDg5NTk4OX0.Vdud2_Gu1RMa81fyGMNonZbnEywKhd7yU2NohyaBfWs' http://localhost:1234/api/animals
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicG9zdGdyZXMiLCJlbWFpbCI6InJhd2FkQGdtYWlsLmNvbSIsImV4cCI6MTUwMDg5NTk4OX0.Vdud2_Gu1RMa81fyGMNonZbnEywKhd7yU2NohyaBfWs' http://localhost:1234/api/users
 
 << Success! >>
 ```

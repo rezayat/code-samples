@@ -6,7 +6,6 @@ import UsersList from './components/UsersList';
 import AddUser from './components/AddUser';
 import LoginUser from './components/LoginUser.jsx';
 import LogoutUser from './components/LogoutUser.jsx';
-// var querystring = require('querystring');
 
 const REACT_API_URL = process.env.REACT_API_URL || '/api';
 const REACT_AUTHORIZATION_URL = process.env.REACT_AUTHORIZATION_URL || '/login';
