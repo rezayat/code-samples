@@ -69,6 +69,7 @@ class App extends Component {
     event.preventDefault();
     const data = {
       username: this.state.username,
+      // row_role: this.state.username,
       email: this.state.email,
       active: true,
       created_at: new Date().toLocaleString(),
@@ -109,7 +110,7 @@ class App extends Component {
     event.preventDefault();
     
     const login_data = {
-      email: this.state.login_username,
+      username: this.state.login_username,
       pass: this.state.login_password
     }
     
@@ -128,6 +129,8 @@ class App extends Component {
       this.getUsers();
      })
     .catch((err) => { console.log(err); })
+
+    this.updateState({'login_password':''});
 
   }
   render_authorized() {

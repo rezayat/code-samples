@@ -36,10 +36,13 @@ The current configuration allows for a containerized application that uses the f
 database: earth
     schema: public   # main data schema (for api access)
         table: users
+            column: email
+            column: row_role
+            ...
 
     schema: basic_auth  # authentication schema
         table: login_users
-            column: email
+            column: username
             column: pass
             column: role
 
@@ -53,24 +56,34 @@ database: earth
 
 You can login using the following credentials:
 
-| username | password  |
-|----------|-----------|
-| admin@gmail.com    | 123456789 |
-| omar@gmail.com     | 987654321 |
-| rawad@gmail.com    | 123456    |
+| username | password  | role      |
+|----------|-----------|-----------|
+| pg       | 1234      | postgres  |
+| admin    | 1234      | admin     |
+| omar     | 1234      | employee  |
+| rawad    | 1234      | employee  |
+
+## Row Level Security
+
+**Row Level Security** enabled on table users as follows:
+
+- Role **postgres** can view (select) all records
+- Roles can view their own records only
+- All roles can insert into table users
 
 ## Testing Authentication
 
 ```bash
 # Failed Login
 
-$ curl -X POST -H 'Content-Type: application/json' -d '{"email":"rawad@gmail.com","pass":"incorrect_pass"}' http://localhost:1234/login
-$ curl -X POST -H 'Content-Type: application/json' -d '{"email":"missing@password.com"}' http://localhost:1234/login
+$ curl -X POST -H 'Content-Type: application/json' -d '{"username":"rawad","pass":"incorrect_pass"}' http://localhost:1234/login
+$ curl -X POST -H 'Content-Type: application/json' -d '{"username":"missing_password"}' http://localhost:1234/login
 $ curl -X POST -H 'Content-Type: application/json' -d '{"pass":"missing_email"}' http://localhost:1234/login
 
 # Successful Login
 
-$ curl -X POST -H 'Content-Type: application/json' -d '{"email":"rawad@gmail.com","pass":"123456"}' http://localhost:1234/login
+$ curl -X POST -H 'Content-Type: application/json' -d '{"username":"pg","pass":"1234"}' http://localhost:1234/login
+$ curl -X POST -H 'Content-Type: application/json' -d '{"username":"rawad","pass":"1234"}' http://localhost:1234/login
 ```
 
 ## Test Authorization
@@ -84,7 +97,13 @@ $ curl http://localhost:1234/api/users
 
 << Unauthorized Access >>
 
-$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicG9zdGdyZXMiLCJlbWFpbCI6InJhd2FkQGdtYWlsLmNvbSIsImV4cCI6MTUwMDg5NTk4OX0.Vdud2_Gu1RMa81fyGMNonZbnEywKhd7yU2NohyaBfWs' http://localhost:1234/api/users
+# log in as user "pg" of role "postgres"
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicG9zdGdyZXMiLCJ1c2VybmFtZSI6InBnIiwiZXhwIjoxNTAxMTY1Mjc3fQ.PCoLWMprT5dlzn8N-7M8sMMUk7Q1HvL7d8W8rVfnTS4' http://localhost:1234/api/users
 
-<< Success! >>
+<< Success only views records for "postgres" >>
+
+# log in as user "rawad" of role "employee"
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZW1wbG95ZWUiLCJ1c2VybmFtZSI6InJhd2FkIiwiZXhwIjoxNTAxMTY1MjI2fQ.PQhXUBeckPFG8uSzsW4SjUeIO9l5Sr7kKGSIJbM_smk' http://localhost:1234/api/users
+
+<< Success only views records for "employee" >>
 ```
