@@ -6,9 +6,9 @@ A proof of concept stack with **postgrest** wrapping a postgres database and exp
 - **Authorization** is implemented on the database level via schema `basic_auth` using function 'sign()' to generate JWT tokens.
 
 **React App**
-- Authenticates users using an **HTTP POST request** to (postgrest)/rpc/login
-- Gets users using an **HTTP GET request** to (postgrest)/users
-- Adds users using an **HTTP POST request** to (postgrest)/users
+- Authenticates login_users using an **HTTP POST request** to (postgrest)/rpc/login
+- Gets applicants using an **HTTP GET request** to (postgrest)/applicants
+- Adds applicants using an **HTTP POST request** to (postgrest)/applicants
 
 ## How to run
 
@@ -35,7 +35,7 @@ The current configuration allows for a containerized application that uses the f
 ```yaml
 database: earth
     schema: public   # main data schema (for api access)
-        table: users
+        table: applicants
             column: email
             column: row_role
             ...
@@ -65,11 +65,11 @@ You can login using the following credentials:
 
 ## Row Level Security
 
-**Row Level Security** enabled on table users as follows:
+**Row Level Security** enabled on table applicants as follows:
 
 - Role **postgres** can view (select) all records
 - Roles can view their own records only
-- All roles can insert into table users
+- All roles can insert into table applicants
 
 ## Testing Authentication
 
@@ -82,28 +82,29 @@ $ curl -X POST -H 'Content-Type: application/json' -d '{"pass":"missing_email"}'
 
 # Successful Login
 
+# log in as user "pg" of role "postgres"
 $ curl -X POST -H 'Content-Type: application/json' -d '{"username":"pg","pass":"1234"}' http://localhost:1234/login
+# log in as user "rawad" of role "employee"
 $ curl -X POST -H 'Content-Type: application/json' -d '{"username":"rawad","pass":"1234"}' http://localhost:1234/login
 ```
 
 ## Test Authorization
 
 ```bash
-$ curl -H 'Authorization: Bearer some.invalid.token' http://localhost:1234/api/users
+$ curl -H 'Authorization: Bearer some.invalid.token' http://localhost:1234/api/applicants
 
 << Invalid JWT Token >>
 
-$ curl http://localhost:1234/api/users
+$ curl http://localhost:1234/api/applicants
 
 << Unauthorized Access >>
 
-# log in as user "pg" of role "postgres"
-$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicG9zdGdyZXMiLCJ1c2VybmFtZSI6InBnIiwiZXhwIjoxNTAxMTY1Mjc3fQ.PCoLWMprT5dlzn8N-7M8sMMUk7Q1HvL7d8W8rVfnTS4' http://localhost:1234/api/users
-
-<< Success only views records for "postgres" >>
-
-# log in as user "rawad" of role "employee"
-$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZW1wbG95ZWUiLCJ1c2VybmFtZSI6InJhd2FkIiwiZXhwIjoxNTAxMTY1MjI2fQ.PQhXUBeckPFG8uSzsW4SjUeIO9l5Sr7kKGSIJbM_smk' http://localhost:1234/api/users
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZW1wbG95ZWUiLCJ1c2VybmFtZSI6InJhd2FkIiwiZXhwIjoxNTAxMjQ3MDg0fQ.NqTJiHS1ABEi7M14OnCrjPHZxb9XXgRt8N0XsQEQH1o' http://localhost:1234/api/applicants
 
 << Success only views records for "employee" >>
+
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicG9zdGdyZXMiLCJ1c2VybmFtZSI6InBnIiwiZXhwIjoxNTAxMjQ3MDMwfQ.uC0xKCBHwjWchKiZNLFOB-555iVuSpJthtH81hSEXOY' http://localhost:1234/api/applicants
+
+<< Success only views records for "postgres" (all records) >>
+
 ```
