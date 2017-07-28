@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-import UsersList from './components/UsersList';
-import AddUser from './components/AddUser';
+import ApplicantsList from './components/ApplicantsList';
+import AddApplicant from './components/AddApplicant';
 import LoginUser from './components/LoginUser.jsx';
 import LogoutUser from './components/LogoutUser.jsx';
 
@@ -17,7 +17,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      users: [],
+      applicants: [],
       username: '',
       email: '',
       login_username: '',
@@ -27,7 +27,7 @@ class App extends Component {
   }
   componentDidMount() {
     if (this.currentState().token){
-      this.getUsers();
+      this.getApplicants();
     }
   }
   currentState(){
@@ -49,10 +49,10 @@ class App extends Component {
     return this.currentState()
   }
 
-  getUsers() {
+  getApplicants() {
     var auth_token = "Bearer " + this.state.token
 
-    axios.get(`${REACT_API_URL}/users`,{
+    axios.get(`${REACT_API_URL}/applicants`,{
       headers:
         {
             'Authorization': auth_token,
@@ -60,12 +60,12 @@ class App extends Component {
             'Accept-language': 'en_US',
         }})
     .then((res) => {
-      this.updateState({ users: res.data }); 
+      this.updateState({ applicants: res.data }); 
     })
     .catch((err) => { console.log(err); })
   }
 
-  addUser(event) {
+  addApplicant(event) {
     event.preventDefault();
     const data = {
       username: this.state.username,
@@ -75,13 +75,13 @@ class App extends Component {
       created_at: new Date().toLocaleString(),
     }
     
-    axios.post(`${REACT_API_URL}/users`, data, {
+    axios.post(`${REACT_API_URL}/applicants`, data, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': "Bearer " + this.state.token,
             }})
     .then((res) => {
-      this.getUsers();
+      this.getApplicants();
       this.updateState({ username: '' });
       this.updateState({ email: '' });
     })
@@ -126,7 +126,7 @@ class App extends Component {
             )
     .then((res) => {
       this.updateState({ 'token': res.data[0]["token"]});
-      this.getUsers();
+      this.getApplicants();
      })
     .catch((err) => { console.log(err); })
 
@@ -139,20 +139,20 @@ class App extends Component {
         <div className="row">
           <div className="col-md-6">
             <br/>
-            <h1>All Users</h1>
+            <h1>All applicants</h1>
             <hr/><br/>
-            <AddUser
+            <AddApplicant
               username={this.state.username}
               email={this.state.email}
               handleChange={ this.handleChange.bind(this) }
-              addUser={ this.addUser.bind(this) }
+              addApplicant={ this.addApplicant.bind(this) }
             />
             <br/>
             <LogoutUser
               logout={ this.logout.bind(this) }
             />
             <br/>
-            <UsersList users={ this.state.users }/>
+            <ApplicantsList applicants={ this.state.applicants }/>
           </div>
         </div>
       </div>

@@ -1,5 +1,9 @@
 \connect test_db
 
+-- add extesions
+create extension if not exists pgcrypto;
+create extension if not exists pgjwt;
+
 -- JWT Extensions related
 
 ALTER DATABASE test_db SET "app.jwt_secret" TO 'not_secret_at_all';
@@ -9,9 +13,6 @@ CREATE SCHEMA if not exists basic_auth;
 CREATE TYPE basic_auth.jwt_token AS (
   token text
 );
-
-create extension if not exists pgcrypto;
-create extension if not exists pgjwt;
 
 CREATE OR REPLACE FUNCTION jwt_test() RETURNS basic_auth.jwt_token
     LANGUAGE sql
@@ -116,33 +117,3 @@ begin
 end;
 $$;
 
-
--- Add fixtures
-
-create role admin;
-create role employee;
-
-revoke all on users from public;
-grant select,insert on users to public;
-
--- grant sequences usage to all
-grant usage, select on all sequences in schema public to public;
-
-create role anon;
-create role authenticator noinherit;
-grant anon to authenticator;
-
-insert into basic_auth.login_users values ('pg','1234','postgres');
-insert into basic_auth.login_users values ('admin','1234','admin');
-insert into basic_auth.login_users values ('omar','1234','employee');
-insert into basic_auth.login_users values ('rawad','1234','employee');
-
-grant usage on schema public, basic_auth to anon;
-grant select on table pg_authid, basic_auth.login_users to anon;
-grant execute on function public.login(text,text) to anon;
-
-alter table users enable row level security;
-
-CREATE POLICY users_policy ON users
-  USING (row_role = current_user);
-  -- WITH CHECK (row_role = current_user)

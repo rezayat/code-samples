@@ -11,8 +11,6 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DATABASE=earth
       - POSTGRES_PORT=5432
-    volumes:
-      - ./database/initdb/:/docker-entrypoint-initdb.d/
     healthcheck:
       test: exit 0
 
@@ -20,10 +18,12 @@ services:
     build: ./rest
     volumes:
       - ./rest/config.toml:/srv/config.toml
-    expose:
-      - "3000"
-    # ports:
-    #   - "3000:3000"
+    # expose:
+    #   - "3000"
+    
+    # to test using curl
+    ports:
+      - "3000:3000"
     depends_on:
       database:
         condition: service_healthy

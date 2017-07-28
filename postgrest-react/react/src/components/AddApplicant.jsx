@@ -1,8 +1,8 @@
 import React from 'react';
 
-const AddUser = (props) => {
+const AddApplicant = (props) => {
   return (
-    <form onSubmit={ (event) => props.addUser(event) }>
+    <form onSubmit={ (event) => props.addApplicant(event) }>
       <div className="form-group">
         <input
           name="username"
@@ -28,10 +28,10 @@ const AddUser = (props) => {
       <input
         type="submit"
         className="btn btn-primary btn-lg btn-block"
-        value="Add User"
+        value="Add Applicant"
       />
     </form>
   )
 }
 
-export default AddUser;
+export default AddApplicant;
