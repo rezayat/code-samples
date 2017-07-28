@@ -1,4 +1,5 @@
-\connect test_db
+\set POSTGRES_DB `echo "$POSTGRES_DB"`
+\connect :POSTGRES_DB
 
 create role admin;
 create role employee;

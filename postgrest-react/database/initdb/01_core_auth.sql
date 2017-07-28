@@ -1,12 +1,16 @@
-\connect test_db
+\set JWT_SECRET `echo "$JWT_SECRET"`
 
--- add extesions
+\set POSTGRES_DB `echo "$POSTGRES_DB"`
+\connect :POSTGRES_DB
+
+-- add existing extensions
 create extension if not exists pgcrypto;
+
+-- add custom extensions
 create extension if not exists pgjwt;
 
--- JWT Extensions related
 
-ALTER DATABASE test_db SET "app.jwt_secret" TO 'not_secret_at_all';
+ALTER DATABASE :POSTGRES_DB SET "app.jwt_secret" TO :'JWT_SECRET';
 
 CREATE SCHEMA if not exists basic_auth;
 
@@ -14,30 +18,12 @@ CREATE TYPE basic_auth.jwt_token AS (
   token text
 );
 
-CREATE OR REPLACE FUNCTION jwt_test() RETURNS basic_auth.jwt_token
-    LANGUAGE sql
-    AS $$
-
-SELECT sign(
-  row_to_json(r), 'any_secret'
-) AS token
-
-  FROM (
-    SELECT
-      'my_role'::text as role,
-      extract(epoch from now())::integer + 300 AS exp
-  ) r;
-$$;
-
--- USER auth support
-
 CREATE TABLE if not exists
 basic_auth.login_users (
   username    text primary key not null, --check ( username ~* '^.+@.+\..+$' ),
   pass     text not null check (length(pass) < 512),
   role     name not null check (length(role) < 512)
 );
-
 
 CREATE OR REPLACE FUNCTION
 basic_auth.check_role_exists() returns trigger
@@ -106,7 +92,7 @@ begin
   end if;
 
   select sign(
-      row_to_json(r), 'not_secret_at_all'
+      row_to_json(r), current_setting('app.jwt_secret')
     ) as token
     from (
       select _role as role, login.username as username,

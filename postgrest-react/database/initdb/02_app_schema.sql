@@ -1,6 +1,5 @@
-CREATE DATABASE test_db;
-
-\connect test_db
+\set POSTGRES_DB `echo "$POSTGRES_DB"`
+\connect :POSTGRES_DB
 
 Create table public.applicants (
     id serial primary key not null,

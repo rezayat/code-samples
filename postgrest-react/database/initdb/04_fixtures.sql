@@ -1,4 +1,6 @@
-\connect test_db
+\set POSTGRES_DB `echo "$POSTGRES_DB"`
+\connect :POSTGRES_DB
+
     
 insert into basic_auth.login_users values ('pg','1234','postgres');
 insert into basic_auth.login_users values ('admin','1234','admin');

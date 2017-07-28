@@ -1,24 +1,8 @@
-# db-uri       = "postgres://user:pass@host:5432/dbname"
-
-# db-uri = "postgres://postgres:postgres@localhost:5432/test_db" # local
-db-uri = "postgres://postgres:postgres@database:5432/test_db" # docker
+db-uri = "postgres://postgres:postgres@database:5432/recruitment"
 db-schema = "public"
 db-anon-role = "anon"
 db-pool = 10
 
-# server-host = "*4"
 server-port = 3000
-
-## base url for swagger output
-# server-proxy-uri = ""
-
-# # choose a secret to enable JWT auth
-# # (use "@filename" to load from separate file)
 jwt-secret = "not_secret_at_all"
 secret-is-base64 = false
-
-## limit rows in response
-# max-rows = 1000
-
-## stored proc to exec immediately after auth
-# pre-request = "stored_proc_name"curl -X POST -F 'username=davidwalsh' -F 'password=something' http://domain.tld/post-to-me.php
