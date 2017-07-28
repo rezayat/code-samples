@@ -3,7 +3,6 @@ version: '2.1'
 services:
 
   database:
-    container_name: database
     build: ./database
     expose:
       - "5432"
@@ -13,13 +12,11 @@ services:
       - POSTGRES_DATABASE=earth
       - POSTGRES_PORT=5432
     volumes:
-      - ./database/create.sql:/docker-entrypoint-initdb.d/01_create.sql
-      - ./database/implement_auth.sql:/docker-entrypoint-initdb.d/02_implement_auth.sql
+      - ./database/initdb/:/docker-entrypoint-initdb.d/
     healthcheck:
       test: exit 0
 
   rest:
-    container_name: rest
     build: ./rest
     volumes:
       - ./rest/config.toml:/srv/config.toml
@@ -34,7 +31,6 @@ services:
       - database
 
   react:
-    container_name: react
     build: ./react
     environment:
       - NODE_ENV=development
@@ -45,7 +41,6 @@ services:
 
   nginx:
     image: nginx:alpine
-    container_name: nginx
     restart: always
     ports:
       - "1234:1234"
