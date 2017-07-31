@@ -90,37 +90,46 @@ database: recruitment
 
 ### General
 
-In order to initialize the database as desired, database initialization script SQL files are defined in /database/initdb. Files get executed in alphabetical order by postgres after  postgres is up.
+In order to initialize the database as desired, database initialization script SQL files are defined in _./database/initdb_.
+Files get executed in alphabetical order by postgres after postgres is up.
 Initialization scripts serve the purpose of defining:
 
-- **CORE AUTHENTICATION** : _01_core_auth.sql_
-    - **Authentication**
-        - **SCHEMA** `basic_auth`
-        - **TABLE** `basic_auth.login_users`
-        - **FUNCTION** `basic_auth.login`: returns **'jwt token'** when provided **correct** credentials
-        - **FUNCTION** `basic_auth.check_role_exists`: prevents adding a `basic_auth.login_users` _login_user_ which is **not mapped** to an existing **Database Role**
-        - other helper functions
+1. **Core Authentication**  _01_core_auth.sql_
+1. **Application Schema**  _02_app_schema.sql_
+1. **Permissions Configuration**  _03_permissions_config.sql_
+1. **Example Fixtures**  _04_fixtures.sql_
 
-    - **Authorization**
-        - **DATABASE VARIABLE** **"app.jwt_secret"**
-        - **FUNCTION** `basic_auth.sign` that generates **jwt token** based on database variable **"app.jwt_secret"**
+#### Core Authentication
 
-    - **Authentication/ Authorization**
-        - **ROLEs** {anon/ authenticator}: can access funciton `basic_auth.login` used to set `current_role` to other roles
+| Object  | Location | Description |
+|----------|-------------|------------------------------|
+| SCHEMA  | `basic_auth` | Authentication schema |
+| TABLE  | `basic_auth.login_users` | Login Users Table |
+| FUNCTION  | `basic_auth.login` | returns `jwt token` when provided **correct** credentials |
+| FUNCTION  | `basic_auth.check_role_exists` | prevents adding a `basic_auth.login_users` _login_user_ which is **not mapped** to an existing **Database Role** other helper functions |
+| DATABASE_VARIABLE  | `app.jwt_secret` | stores db variable jwt_secret |
+| FUNCTION  | `basic_auth.sign` | that generates `jwt token` based on database variable `app.jwt_secret` |
+| ROLEs  | {anon/ authenticator} | can access funciton `basic_auth.login` used to set `current_role` to other roles |
 
-- **APPLICATION SCHEMA** : _02_app_schema.sql_
-    - **Application Tables** (example tables)
-        - **TABLE** `public.applicants`
+#### Application Schema
 
-- **PERMISSIONS CONFIGURATION** : _03_permissions_config.sql_
-    - **Database Roles**
-        - **ROLEs** : example roles {admin,employee}
-        - **PERMISSIONs** : simple permissions allow insert and select for defined `Database Role`s
-        - **ROW LEVEL SECURITY** : allow each role to view it's own `public.applicants` rows
+| Object  | Location | Description |
+|----------|-------------|------------------------------|
+| **TABLE** | `public.applicants`| example applicants table |
 
-- **EXAMPLE FIXTURES** : _04_fixtures.sql**_
-    - **ROWs** `basic_auth.login_users` : example _login_users_ that map to a defined `Database Role`
-    - **ROWs** `public.applicants`: example _applicants_ assumed to be inserted by specific `Database Role`
+#### Permissions Configuration
+
+| Object  | Description |
+|----------|----------------------------------------------|
+| ROLEs | example roles {admin,employee} |
+| PERMISSIONs | simple permissions allow insert and select for defined `Database Role`s |
+| ROW_LEVEL_SECURITY | allow each role to view it's own `public.applicants` rows |
+
+#### Example Fixtures
+| Object  | Location | Description |
+|----------|-------------|-------------------------------------------|
+| ROWs | `basic_auth.login_users` | example _login_users_ that map to a defined `Database Role` |
+| ROWs | `public.applicants` | example _applicants_ assumed to be inserted by specific `Database Role` |
 
 ### Roles
 
