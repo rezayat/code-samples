@@ -1,14 +1,9 @@
 # postgrest-react
 
-A proof of concept stack with **postgrest** wrapping a postgres database and exposing schema "public" as an endpoint.
-
-- **Authentication** is implemented on the database level via schema `basic_auth` using table `login_USERS` and function `login()` to store and authenticate login_users.
-- **Authorization** is implemented on the database level via schema `basic_auth` using function `sign()` to generate JWT tokens.
-
-<!-- **React App**
-- Authenticates login_users using an **HTTP POST request** to `(postgrest)/rpc/login`
-- Gets applicants using an **HTTP GET request** to `(postgrest)/applicants`
-- Adds applicants using an **HTTP POST request** to `(postgrest)/applicants` -->
+A proof of concept stack that demonstrates 
+- **postgrest** wrapping a postgres database, exposing schema "public" as an endpoint, providing authorization and authentication mechanisms, granting permissions and setting row level security policies.
+- **react.js** as a simple Single Page Application that provides a web interface to login users,view and insert records.
+- nginx and other configurations that glue contianers and components together thus makeing the implementation possible.
 
 ## Project Directory Structure
 ``` bash
@@ -48,18 +43,6 @@ A proof of concept stack with **postgrest** wrapping a postgres database and exp
     ├── config.toml                 # postgrest configuration
     └── Dockerfile
 ```
-## Infrastructure (nginx service)
-
-The current configuration allows for a containerized application that uses the following infrastructure:
-(defined in nginx.conf)
-```
-    nginx (webserver)
-        == Reverse Proxy =>
-            :1234/ ==> react: 5000 (React Application)
-            :1234/api/ ==> rest: 3000 (Postgrest)
-                ==> database: 5432 (Postgres Database)
-            :1234/login ==> rest: 3000/rpc/login (Postgrest User Login and JWT token Generator)
-```
 
 ## Database (database service)
 ### Structure
@@ -94,53 +77,46 @@ In order to initialize the database as desired, database initialization script S
 Files get executed in alphabetical order by postgres after postgres is up.
 Initialization scripts serve the purpose of defining:
 
-1. **Core Authentication**  _01_core_auth.sql_
-1. **Application Schema**  _02_app_schema.sql_
-1. **Permissions Configuration**  _03_permissions_config.sql_
-1. **Example Fixtures**  _04_fixtures.sql_
+1. **Core Authentication**  <!-- `01_core_auth.sql` -->
+1. **Application Schema**  <!-- `02_app_schema.sql` -->
+1. **Permissions Configuration**  <!-- `03_permissions_config.sql` -->
+1. **Example Fixtures**  <!-- `04_fixtures.sql` -->
 
-#### Core Authentication
+### Core Authentication
 
-| Object  | Location | Description |
-|----------|-------------|------------------------------|
-| SCHEMA  | `basic_auth` | Authentication schema |
-| TABLE  | `basic_auth.login_users` | Login Users Table |
-| FUNCTION  | `basic_auth.login` | returns `jwt token` when provided **correct** credentials |
-| FUNCTION  | `basic_auth.check_role_exists` | prevents adding a `basic_auth.login_users` _login_user_ which is **not mapped** to an existing **Database Role** other helper functions |
-| DATABASE_VARIABLE  | `app.jwt_secret` | stores db variable jwt_secret |
-| FUNCTION  | `basic_auth.sign` | that generates `jwt token` based on database variable `app.jwt_secret` |
-| ROLEs  | {anon/ authenticator} | can access funciton `basic_auth.login` used to set `current_role` to other roles |
+The core authentication script in file `./database/initdb/01_core_auth.sql` defines all the SQL statements and functions needed in order to implement **authentication** and **authorization** in an independent script thus facilitating _code reusability_.
 
-#### Application Schema
+It uses a seperate **schema** `basic_auth` and **table** `basic_auth.login_users` to store login users' data.
 
-| Object  | Location | Description |
-|----------|-------------|------------------------------|
-| **TABLE** | `public.applicants`| example applicants table |
+Defined users **MUST belong** to an **EXISTING database role** and are checked using a trigger on insert and update by function `basic_auth.check_role_exists` to have an existing database role.
 
-#### Permissions Configuration
+A **jwt token** is generated based on database variable `app.jwt_secret` using the function `basic_auth.sign`. However, the function `basic_auth.login` authenticates login users and returns a **jwt authorization token** when provided CORRECT credentials thus serving both purposes of authenticationa and authorization.
 
-| Object  | Description |
-|----------|----------------------------------------------|
-| ROLEs | example roles {admin,employee} |
-| PERMISSIONs | simple permissions allow insert and select for defined `Database Role`s |
-| ROW_LEVEL_SECURITY | allow each role to view it's own `public.applicants` rows |
+Defined roles `anon` and `authenticator` are allowed to execute function `basic_auth.login` so they authenticate and authorize users.
 
-#### Example Fixtures
-| Object  | Location | Description |
-|----------|-------------|-------------------------------------------|
-| ROWs | `basic_auth.login_users` | example _login_users_ that map to a defined `Database Role` |
-| ROWs | `public.applicants` | example _applicants_ assumed to be inserted by specific `Database Role` |
+### Application Schema
 
-### Roles
+Application schema is defined independently in file `./database/initdb/02_app_schema.sql` in which an example table `public.applicants` is defined.
 
-In order to demonstrate Authorization and Authentication the following **Database Roles** where implemented:
-- postgres (implemented by default)
-- admin
-- employee
+Tables in schema `public` are application specific and follow application requirements.
 
-##### Fixture Data
+### Permissions Configuration
 
-**Login users** you can use to login using the following credentials:
+After defining authentication/ authorization mechanisms and the required application schema, **database roles** and **permission** are defined in file `./database/initdb/03_permissions_config.sql`.
+
+Database roles (those which login users are assigned to) are defined in a flat or hierarchical style in accordance with the organizational role hierarchy.
+
+Roles are granted/revoked permissions on database/schema/table/function... operations {insert, update, delete, select, use, execute ...} as well as Row level securtiy policies might be implemented as required by the application specifications.
+
+In our example: two roles `admin` and `employee` are defined and granted the permission to view (select) their own `public.applicants` rows using `public.applicants.row_role = current_role`, whereas role `postgres` is allowed (unless it is manually revoked) to view all records because it holds the database ownership.
+
+### Example Fixtures
+
+In order to clearly demonstrate this demo, example data was added in file `./database/initdb/04_fixtures.sql`.
+
+Some example `public.applicants` records where inserted and provided random valid `row_role` values.
+
+Example `basic_auth.login_users` user records where inserted into the database and assigned valid roles as follows:
 
 | username | password  | database role |
 |----------|-----------|---------------|
@@ -149,24 +125,45 @@ In order to demonstrate Authorization and Authentication the following **Databas
 | omar     | 1234      | employee      |
 | rawad    | 1234      | employee      |
 
-#### Permissions
-- Role **postgres** has _(by default - unless manually revoked)_ grant permission over the whole db (db owner)
+## Postgrest (rest service)
 
-#### Row level security
+Postgrest rest application is run and configured using file `./rest/config.toml` to do the following:
 
-**Row Level Security** enabled on table applicants as follows:
+- connect to application database `recruitment` using db-uri = "postgres://postgres:postgres@database:5432/recruitment"
+- expose a login endpoint `rest/rpc/login` in wich users are authenticated and provided a jwt authorization token
+- expose schema `public` and hence table `public.applicants` enabling SELECT and INSERT operations using methods GET and POST respectively through endpoint `rest/applicants`
 
-- Role **postgres** can view (select) all records
-- Roles **{admin, employee}** can view their own records only
-    - using **row.row_role = current_role** (logged-in role)
-- All roles can insert into table applicants
-    - using **row_role = current_role**
+**NOTE THAT**: Following `curl` example tests are provided so you can test the rest service.
 
 ## React (react service)
-- Authenticates login_users using an **HTTP POST request** to _[postrest]/rpc/login_
-    - **postgrest** returns **'jwt token'** when provided **correct** credentials via route: /rpc/logins
-- Gets applicants using an **HTTP GET request** to _[postrest]/applicants_
-- Adds applicants using an **HTTP POST request** to _[postrest]/applicants_
+
+A _Single Page Application_ frontend is implemented using React.js where it provides:
+
+- **Case no user is logged in**
+    - a login form to login the user and store aquired authorization token
+
+- **Case a user is logged in**
+    - a section to view already added applicants
+    - an add user form to insert a new applicant to the database
+    - a logout button :)
+
+Under the hood, the react application makes HTTP API calls to the "rest service" in order to accomplish previous objectives as follows:
+
+- **HTTP POST request** to _[rest]/rpc/login_ in order to authenticate login_users
+- **HTTP GET request** to _[rest]/applicants_ in order to get applicants
+- **HTTP POST request** to _[rest]/applicants_ in order to add applicants
+
+## Infrastructure (nginx service)
+
+The main pupose of the nginx service is to define and expose one or more endpoint(s) to the application and to facilitate container to container communication. These purposes are acheived through routing calls via a reverse proxy to the desired endpoint.
+
+In our example nginx is configured using file `./nginx/nginx.conf` to listen to "port 1234" and route calls as follows:
+
+| Calls from route | Routed to endpoint | Purpose |
+| ---------- | ------------------ | ------- |
+| :1234/ | react:5000/ | Expose React application |
+| :1234/api | rest:3000/ | Expose postgrest |
+| :1234/login | rest:3000/rpc/login | Expose postgrest login endpoint |
 
 ## How to run
 
@@ -181,34 +178,84 @@ $ python -m webbrowser http://localhost:1234
 # Failed Login
 
 $ curl -X POST -H 'Content-Type: application/json' -d '{"username":"rawad","pass":"incorrect_pass"}' http://localhost:1234/login
+{"hint":null,"details":null,"code":"28P01","message":"invalid user or password"}
+
 $ curl -X POST -H 'Content-Type: application/json' -d '{"username":"missing_password"}' http://localhost:1234/login
+{"hint":"No function matches the given name and argument types. You might need to add explicit type casts.","details":null,"code":"42883","message":"function public.login(username => unknown) does not exist"}
+
 $ curl -X POST -H 'Content-Type: application/json' -d '{"pass":"missing_email"}' http://localhost:1234/login
+{"hint":"No function matches the given name and argument types. You might need to add explicit type casts.","details":null,"code":"42883","message":"function public.login(pass => unknown) does not exist"}
 
 # Successful Login
 
-# log in as user "pg" of role "postgres" and get Authorizaion Token for role "postgres"
+# log in as user "pg" of role "postgres" and get Authorization Token for role "postgres"
 $ curl -X POST -H 'Content-Type: application/json' -d '{"username":"pg","pass":"1234"}' http://localhost:1234/login
-# log in as user "rawad" of role "employee" and get Authorizaion Token for role "employee"
+[{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicG9zdGdyZXMiLCJ1c2VybmFtZSI6InBnIiwiZXhwIjoxNTAxNTgzMTM3fQ.2aOx_fqk8TYf9E0-vBEASz0Yaitn3AcTGpoozudvueY"}]
+
+# log in as user "rawad" of role "employee" and get Authorization Token for role "employee"
 $ curl -X POST -H 'Content-Type: application/json' -d '{"username":"rawad","pass":"1234"}' http://localhost:1234/login
+[{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZW1wbG95ZWUiLCJ1c2VybmFtZSI6InJhd2FkIiwiZXhwIjoxNTAxNTgzMTM4fQ.lXhzP0WbeYkxtLYTn9BR8AQCd1sI4Vkp5XJjv9ZQ3YE"}]
+
 ```
 
 ## Test Authorization
 
 ```bash
-$ curl -H 'Authorization: Bearer some.invalid.token' http://localhost:1234/api/applicants
-
-<< Invalid JWT Token >>
-
 $ curl http://localhost:1234/api/applicants
+{"hint":null,"details":null,"code":"42501","message":"permission denied for relation applicants"}
 
-<< Unauthorized Access >>
+$ curl -H 'Authorization: Bearer some.invalid.token' http://localhost:1234/api/applicants
+{"message":"JWT invalid"}
 
-$ curl -H 'Authorization: Bearer {jwt token for employee}' http://localhost:1234/api/applicants
+$ # get applicants as user "pg" of role "postgres" using previously generated 'jwt token'
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoicG9zdGdyZXMiLCJ1c2VybmFtZSI6InBnIiwiZXhwIjoxNTAxNTgyNTY4fQ.2cS-AGmgsUJOg7dNXOSmbpPZt4j0XQvY7BocaQLSCxg' http://localhost:1234/api/applicants
+[
+    {
+        "active": true,
+        "created_at": "2017-06-07T01:23:45",
+        "email": "test.user_1@gmail.com",
+        "id": 1,
+        "row_role": "employee",
+        "username": "test_user 1"
+    },
+    {
+        "active": true,
+        "created_at": "2017-07-08T01:23:45",
+        "email": "test.user_2@gmail.com",
+        "id": 2,
+        "row_role": "employee",
+        "username": "test_user 2"
+    },
+    {
+        "active": true,
+        "created_at": "2017-08-09T01:23:45",
+        "email": "test.user_3@gmail.com",
+        "id": 3,
+        "row_role": "admin",
+        "username": "test_user 3"
+    }
+]
 
-<< Success only views records for "employee" >>
+$ # get applicants as user "rawad" of role "employee" using previously generated 'jwt token'
+$ curl -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiZW1wbG95ZWUiLCJ1c2VybmFtZSI6InJhd2FkIiwiZXhwIjoxNTAxNTgyNjQwfQ.v8zwy8QM2aXWaNOj4FVuvBwM_adWquSVrKYCAubHh8c' http://localhost:1234/api/applicants
 
-$ curl -H 'Authorization: Bearer {jwt token for postgres}' http://localhost:1234/api/applicants
-
-<< Success only views records for "postgres" (all records) >>
+[
+    {
+        "active": true,
+        "created_at": "2017-06-07T01:23:45",
+        "email": "test.user_1@gmail.com",
+        "id": 1,
+        "row_role": "employee",
+        "username": "test_user 1"
+    },
+    {
+        "active": true,
+        "created_at": "2017-07-08T01:23:45",
+        "email": "test.user_2@gmail.com",
+        "id": 2,
+        "row_role": "employee",
+        "username": "test_user 2"
+    }
+]
 
 ```
