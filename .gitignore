@@ -38,6 +38,8 @@ yarn-error.log*
 *.sublime-*
 
 # files
+*.puml
+
 http_auth.txt
 jwt_auth.txt
 prest-react/prest/local_config.toml

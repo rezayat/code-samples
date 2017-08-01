@@ -125,6 +125,10 @@ Example `basic_auth.login_users` user records where inserted into the database a
 | omar     | 1234      | employee      |
 | rawad    | 1234      | employee      |
 
+### Database Diagram 
+
+![database diagram](./database.png)
+
 ## Postgrest (rest service)
 
 Postgrest rest application is run and configured using file `./rest/config.toml` to do the following:
@@ -173,6 +177,10 @@ In our example nginx is configured using file `./nginx/nginx.conf` to listen to 
 | :1234/ | react:5000/ | Expose React application |
 | :1234/api | rest:3000/ | Expose postgrest |
 | :1234/login | rest:3000/rpc/login | Expose postgrest login endpoint |
+
+### Infrastructure Diagram
+
+![infrastructure diagram](./infrastructure.png)
 
 ## How to run
 
