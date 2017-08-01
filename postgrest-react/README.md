@@ -153,13 +153,22 @@ Under the hood, the react application makes HTTP API calls to the "rest service"
 - **HTTP GET request** to _[rest]/applicants_ in order to get applicants
 - **HTTP POST request** to _[rest]/applicants_ in order to add applicants
 
-## Infrastructure (nginx service)
+## Infrastructure
 
-The main pupose of the nginx service is to define and expose one or more endpoint(s) to the application and to facilitate container to container communication. These purposes are acheived through routing calls via a reverse proxy to the desired endpoint.
+### Defined in docker-compose.yml
+
+| Container | Port | Public Port | Links    |
+| --------- | ---- | ----------- | -------- |
+| database  | 5432 | -           | -        |
+| rest      | 3000 | -           | database |
+| react     | 5000 | -           | -        |
+| nginx     | 1234 | 1234        | rest     |
+
+### Defined in nginx configuration
 
 In our example nginx is configured using file `./nginx/nginx.conf` to listen to "port 1234" and route calls as follows:
 
-| Calls from route | Routed to endpoint | Purpose |
+| Source route | Proxy to | Purpose |
 | ---------- | ------------------ | ------- |
 | :1234/ | react:5000/ | Expose React application |
 | :1234/api | rest:3000/ | Expose postgrest |
