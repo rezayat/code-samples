@@ -3,24 +3,19 @@ version: '2.1'
 services:
 
   database:
-    image: postgres:alpine
-    container_name: database
     build: ./database
     expose:
       - "5432"
     environment:
+      - POSTGRES_DB=recruitment
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DATABASE=earth
       - POSTGRES_PORT=5432
-    volumes:
-      - ./database/create.sql:/docker-entrypoint-initdb.d/01_create.sql
-      - ./database/implement_auth.sql:/docker-entrypoint-initdb.d/02_implement_auth.sql
+      - JWT_SECRET=not_secret_at_all
     healthcheck:
       test: exit 0
 
   rest:
-    container_name: rest
     build: ./rest
     volumes:
       - ./rest/config.toml:/srv/config.toml
@@ -32,9 +27,17 @@ services:
     links:
       - database
 
+  react:
+    build: ./react
+    environment:
+      - NODE_ENV=development
+      - REACT_API_URL=/api
+      - REACT_AUTHORIZATION_URL=/rpc
+    expose:
+      - "5000"
+
   nginx:
     image: nginx:alpine
-    container_name: nginx
     restart: always
     ports:
       - "1234:1234"
