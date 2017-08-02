@@ -1,70 +1,23 @@
 __pycache__
-env
-docke
-docker_commands.html
-notes.html
-Questions.html
-restart_users-service.sh
-run_env.sh
-initialize_project.sh
-test_docker.sh
-docker_versions.sh
-restart_users-service.sh
-env
 
-# See https://help.github.com/ignore-files/ for more about ignoring files.
 
-# dependencies
-node_modules
-
-# testing
-coverage
-
-# production
-build
-
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# editors
-*.sublime-*
-
-# files
+# postgrest-react
 *.puml
-
-http_auth.txt
-jwt_auth.txt
-prest-react/prest/local_config.toml
-prest-react/prest/local_prest
-prest-react/prest/alpine_prest
-prest-react/prest/prest_01
-prest-react/postgres/test_database.sh
-
-prest-react/TODOs.md
-prest-react/TODOs.html
-prest-react/nginx_local.conf
-prest-react/run_local.md
-
-postgrest-react/rest/local_config.toml
-postgrest-react/rest/local_prest
-postgrest-react/rest/alpine_prest
-postgrest-react/rest/prest_01
+postgrest-react/react/build/
 postgrest-react/react/nginx_local.conf
+postgrest-react/react/node_envs.sh
+postgrest-react/react/node_modules/
 postgrest-react/rest/postgrest_local
 
-postgrest-react/TODOs.md
-postgrest-react/TODOs.html
-
-envs.txt
-node_envs.sh
-
-# directories
-/prest/keys/
+# prest-react
+prest-react/flask/env/
+prest-react/nginx_local.conf
+prest-react/postgres/test_database.sh
+prest-react/prest/local_config.toml
+prest-react/prest/local_prest
+prest-react/prest/prest_01
+prest-react/react/build/
+prest-react/react/node_envs.sh
+prest-react/react/node_modules/
+prest-react/run_local.md
+prest-react/TODOs.md
