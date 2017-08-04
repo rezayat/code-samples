@@ -21,3 +21,8 @@ prest-react/react/node_envs.sh
 prest-react/react/node_modules/
 prest-react/run_local.md
 prest-react/TODOs.md
+
+# postgrest-rls
+postgrest-rls/testing_example.sql
+postgrest-rls/testing.sh
+
