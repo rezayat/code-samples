@@ -1,6 +1,6 @@
 # postgrest-rls
 
-A proof of concept stack that demonstrates a postgres database with PERMISSIONS and  ROW LEVEL SECURITY ready to be integrated with "postgrest".
+A proof of concept stack that demonstrates a postgres database with PERMISSIONS and ROW LEVEL SECURITY ready to be integrated with "postgrest".
 
 ## Project Directory Structure
 ``` bash
@@ -75,6 +75,12 @@ Application schema is defined independently in file `./database/initdb/02_app_sc
 
 Tables in schema `public` are application specific and follow application requirements.
 
+#### Database Diagram 
+
+Our example mostly makes use of the following `database tables`:
+
+![entity relationship diagram](./database_tables.png)
+
 ### Permissions Configuration
 
 After defining authentication/ authorization mechanisms and the required application schema, **database roles** and **permission** are defined in file `./database/initdb/03_permissions_config.sql`.
@@ -83,21 +89,23 @@ Database roles (those which login users are assigned to) are defined in a flat o
 
 Roles are granted/revoked permissions on database/schema/table/function... operations {insert, update, delete, select, use, execute ...} as well as Row level securtiy policies might be implemented as required by the application specifications.
 
-> TODO: showcase our example roles
+In our example we added the following `database roles`:
 
-<!-- In our example: two roles `admin` and `employee` are defined and granted the permission to view (select) their own `public.applicants` rows using `public.applicants.row_role = current_role`, whereas role `postgres` is allowed (unless it is manually revoked) to view all records because it holds the database ownership. -->
+| Role | Permissions | In Role
+|----- | ----------- | --------
+| accountant | read own, write to invoice | -
+| salesman | read own write to product, read own invoice | -
+| auditor | read product, invoice | -
+| accounting_auditor | read invoice | auditor
+| sales_auditor | read product, invoice | auditor
+| manager | read own, write product, invoice | -
 
 ### Example Fixtures
 
 In order to clearly demonstrate this demo, example data was added in file `./database/initdb/04_fixtures.sql`.
 
+Some example `public.invoice`,`basic_auth.login_users` and `public.product` records where inserted and provided random **valid** values.
 
-Some example `public.invoice` and `public.product` records where inserted and provided random valid `row_role` values.
-
-### Database Diagram 
-> TODO: add database diagram
-
-![database diagram](./database.png)
 
 ## Infrastructure
 
@@ -106,11 +114,6 @@ Some example `public.invoice` and `public.product` records where inserted and pr
 | Container | Port | Public Port | Links    |
 | --------- | ---- | ----------- | -------- |
 | database  | 5432 | -           | -        |
-
-### Infrastructure Diagram
-> TODO: add infrastructure diagram
-
-![infrastructure diagram](./infrastructure.png)
 
 ## How to run
 
@@ -125,145 +128,147 @@ In order to carry tests, open a bash into the running 'database' container using
 ```bash
 $ docker-compose run database bash
 bash-4.3# psql -h database -U postgres recruitment
-Password for user postgres:
+Password for user postgres: # postgres
 psql (9.5.7)
 Type "help" for help.
-
-recruitment=>
 
 ```
 
 ### Testing Roles
-> TODO: comment the test code
 
-```bash
-recruitment=> set role imad;
+```SQL
+recruitment=> set role imad; -- salesman
 SET
-recruitment=> select * from product;
- id |     name     | price | dummy | row_role |         created_at
-----+--------------+-------+-------+----------+----------------------------
-  3 | carton       |     2 |       | imad     | 2017-08-04 12:00:38.47544
-  4 | carbon fiber |    37 |       | imad     | 2017-08-04 12:00:38.476382
-  5 | caramel      |    14 |       | imad     | 2017-08-04 12:00:38.478394
-(3 rows)
-
 recruitment=> select * from invoice;
+-- can view own records only where salesman = current_role (imad)
  id | type | amount  | dummy | salesman | row_role |         created_at
 ----+------+---------+-------+----------+----------+----------------------------
-  2 | in   |  829997 |       | imad     | rawad    | 2017-08-04 12:00:38.463204
-  3 | in   |    3232 |       | imad     | man      | 2017-08-04 12:00:38.46422
-  7 | in   | 1723297 |       | imad     | jawad    | 2017-08-04 12:00:38.470157
+  2 | in   |  829997 |       | imad     | rawad    | 2017-08-07 08:15:25.566907
+  3 | in   |    3232 |       | imad     | man      | 2017-08-07 08:15:25.567861
+  7 | in   | 1723297 |       | imad     | jawad    | 2017-08-07 08:15:25.574362
 (3 rows)
 
-recruitment=> set role rawad;
+recruitment=> select * from product;
+-- can view own records only where row_role = current_role (imad)
+ id |     name     | price | dummy | row_role |         created_at
+----+--------------+-------+-------+----------+----------------------------
+  2 | caramel      |    14 |       | imad     | 2017-08-07 08:15:25.577553
+  3 | carbon fiber |    37 |       | imad     | 2017-08-07 08:15:25.579552
+  5 | carton       |     2 |       | imad     | 2017-08-07 08:15:25.582814
+(3 rows)
+
+recruitment=> update product set dummy = 'dum 1' where id =1 ;
+-- cannot edit others records
+UPDATE 0
+recruitment=> update product set dummy = 'dum 2' where id =2 ;
+-- can edit own records
+UPDATE 1
+recruitment=> set role rawad; -- accountant
 SET
 recruitment=> select * from product;
+-- cannot view table product
 ERROR:  permission denied for relation product
 recruitment=> select * from invoice;
+-- can view own records only where row_role = current_role (rawad)
  id | type | amount | dummy | salesman | row_role |         created_at
 ----+------+--------+-------+----------+----------+----------------------------
-  2 | in   | 829997 |       | imad     | rawad    | 2017-08-04 12:00:38.463204
-  5 | out  |  99097 |       | ziad     | rawad    | 2017-08-04 12:00:38.467262
+  2 | in   | 829997 |       | imad     | rawad    | 2017-08-07 08:15:25.566907
+  5 | out  |  99097 |       | ziad     | rawad    | 2017-08-07 08:15:25.571303
 (2 rows)
 
-recruitment=> set role omar;
+recruitment=> update invoice set dummy = 'dum 3' where id = 1;
+-- cannot edit others records
+UPDATE 0
+recruitment=> update invoice set dummy = 'dum 4' where id = 5;
+-- can edit own records
+UPDATE 1
+recruitment=> set role omar; -- accouting_auditor
 SET
 recruitment=> select * from product;
+-- cannot view table product
 ERROR:  permission denied for relation product
 recruitment=> select * from invoice;
+-- can see all records
  id | type | amount  | dummy | salesman | row_role |         created_at
 ----+------+---------+-------+----------+----------+----------------------------
-  1 | out  | 3112197 |       | ziad     | jawad    | 2017-08-04 12:00:38.460888
-  2 | in   |  829997 |       | imad     | rawad    | 2017-08-04 12:00:38.463204
-  3 | in   |    3232 |       | imad     | man      | 2017-08-04 12:00:38.46422
-  4 | out  | 1101097 |       | ziad     | jawad    | 2017-08-04 12:00:38.466265
-  5 | out  |   99097 |       | ziad     | rawad    | 2017-08-04 12:00:38.467262
-  6 | out  |    4327 |       | ziad     | man      | 2017-08-04 12:00:38.4693
-  7 | in   | 1723297 |       | imad     | jawad    | 2017-08-04 12:00:38.470157
+  1 | out  | 3112197 |       | ziad     | jawad    | 2017-08-07 08:15:25.564469
+  2 | in   |  829997 |       | imad     | rawad    | 2017-08-07 08:15:25.566907
+  3 | in   |    3232 |       | imad     | man      | 2017-08-07 08:15:25.567861
+  4 | out  | 1101097 |       | ziad     | jawad    | 2017-08-07 08:15:25.569863
+  6 | out  |    4327 |       | ziad     | man      | 2017-08-07 08:15:25.57337
+  7 | in   | 1723297 |       | imad     | jawad    | 2017-08-07 08:15:25.574362
+  5 | out  |   99097 | dum 4 | ziad     | rawad    | 2017-08-07 08:15:25.571303
 (7 rows)
 
-recruitment=> set role joe;
+recruitment=> update invoice set dummy = 'dum 5' where id = 3;
+-- cannot edit records
+ERROR:  permission denied for relation invoice
+recruitment=> set role joe; -- sales_auditor
 SET
 recruitment=> select * from product;
+-- can view table product
  id |     name     | price | dummy | row_role |         created_at
 ----+--------------+-------+-------+----------+----------------------------
-  1 | car          | 10203 |       | ziad     | 2017-08-04 12:00:38.472213
-  2 | carpet       |   250 |       | ziad     | 2017-08-04 12:00:38.473347
-  3 | carton       |     2 |       | imad     | 2017-08-04 12:00:38.47544
-  4 | carbon fiber |    37 |       | imad     | 2017-08-04 12:00:38.476382
-  5 | caramel      |    14 |       | imad     | 2017-08-04 12:00:38.478394
+  1 | car          | 10203 |       | ziad     | 2017-08-07 08:15:25.576441
+  3 | carbon fiber |    37 |       | imad     | 2017-08-07 08:15:25.579552
+  4 | carpet       |   250 |       | ziad     | 2017-08-07 08:15:25.580732
+  5 | carton       |     2 |       | imad     | 2017-08-07 08:15:25.582814
+  2 | caramel      |    14 | dum 2 | imad     | 2017-08-07 08:15:25.577553
 (5 rows)
 
+recruitment=>  update product set dummy = 'dum 6';
+-- cannot edit table product
+ERROR:  permission denied for relation product
 recruitment=> select * from invoice;
+-- can view table invoice
  id | type | amount  | dummy | salesman | row_role |         created_at
 ----+------+---------+-------+----------+----------+----------------------------
-  1 | out  | 3112197 |       | ziad     | jawad    | 2017-08-04 12:00:38.460888
-  2 | in   |  829997 |       | imad     | rawad    | 2017-08-04 12:00:38.463204
-  3 | in   |    3232 |       | imad     | man      | 2017-08-04 12:00:38.46422
-  4 | out  | 1101097 |       | ziad     | jawad    | 2017-08-04 12:00:38.466265
-  5 | out  |   99097 |       | ziad     | rawad    | 2017-08-04 12:00:38.467262
-  6 | out  |    4327 |       | ziad     | man      | 2017-08-04 12:00:38.4693
-  7 | in   | 1723297 |       | imad     | jawad    | 2017-08-04 12:00:38.470157
+  1 | out  | 3112197 |       | ziad     | jawad    | 2017-08-07 08:15:25.564469
+  2 | in   |  829997 |       | imad     | rawad    | 2017-08-07 08:15:25.566907
+  3 | in   |    3232 |       | imad     | man      | 2017-08-07 08:15:25.567861
+  4 | out  | 1101097 |       | ziad     | jawad    | 2017-08-07 08:15:25.569863
+  6 | out  |    4327 |       | ziad     | man      | 2017-08-07 08:15:25.57337
+  7 | in   | 1723297 |       | imad     | jawad    | 2017-08-07 08:15:25.574362
+  5 | out  |   99097 | dum 4 | ziad     | rawad    | 2017-08-07 08:15:25.571303
 (7 rows)
 
+recruitment=>  update invoice set dummy = 'dum 7';
+- cannot edit table invoice
+ERROR:  permission denied for relation invoice
 recruitment=> set role man;
 SET
-recruitment=> select * from invoice;
- id | type | amount  | dummy | salesman | row_role |         created_at
-----+------+---------+-------+----------+----------+----------------------------
-  1 | out  | 3112197 |       | ziad     | jawad    | 2017-08-04 12:00:38.460888
-  2 | in   |  829997 |       | imad     | rawad    | 2017-08-04 12:00:38.463204
-  3 | in   |    3232 |       | imad     | man      | 2017-08-04 12:00:38.46422
-  4 | out  | 1101097 |       | ziad     | jawad    | 2017-08-04 12:00:38.466265
-  5 | out  |   99097 |       | ziad     | rawad    | 2017-08-04 12:00:38.467262
-  6 | out  |    4327 |       | ziad     | man      | 2017-08-04 12:00:38.4693
-  7 | in   | 1723297 |       | imad     | jawad    | 2017-08-04 12:00:38.470157
-(7 rows)
-
 recruitment=> select * from product;
+-- can view table product
  id |     name     | price | dummy | row_role |         created_at
 ----+--------------+-------+-------+----------+----------------------------
-  1 | car          | 10203 |       | ziad     | 2017-08-04 12:00:38.472213
-  2 | carpet       |   250 |       | ziad     | 2017-08-04 12:00:38.473347
-  3 | carton       |     2 |       | imad     | 2017-08-04 12:00:38.47544
-  4 | carbon fiber |    37 |       | imad     | 2017-08-04 12:00:38.476382
-  5 | caramel      |    14 |       | imad     | 2017-08-04 12:00:38.478394
+  1 | car          | 10203 |       | ziad     | 2017-08-07 08:15:25.576441
+  3 | carbon fiber |    37 |       | imad     | 2017-08-07 08:15:25.579552
+  4 | carpet       |   250 |       | ziad     | 2017-08-07 08:15:25.580732
+  5 | carton       |     2 |       | imad     | 2017-08-07 08:15:25.582814
+  2 | caramel      |    14 | dum 2 | imad     | 2017-08-07 08:15:25.577553
 (5 rows)
 
-recruitment=> set role man;
-SET
-recruitment=> select * from invoice;
- id | type | amount  | dummy | salesman | row_role |         created_at
-----+------+---------+-------+----------+----------+----------------------------
-  1 | out  | 3112197 |       | ziad     | jawad    | 2017-08-04 12:00:38.460888
-  2 | in   |  829997 |       | imad     | rawad    | 2017-08-04 12:00:38.463204
-  3 | in   |    3232 |       | imad     | man      | 2017-08-04 12:00:38.46422
-  4 | out  | 1101097 |       | ziad     | jawad    | 2017-08-04 12:00:38.466265
-  5 | out  |   99097 |       | ziad     | rawad    | 2017-08-04 12:00:38.467262
-  6 | out  |    4327 |       | ziad     | man      | 2017-08-04 12:00:38.4693
-  7 | in   | 1723297 |       | imad     | jawad    | 2017-08-04 12:00:38.470157
-(7 rows)
-
-recruitment=> select * from product;
- id |     name     | price | dummy | row_role |         created_at
-----+--------------+-------+-------+----------+----------------------------
-  1 | car          | 10203 |       | ziad     | 2017-08-04 12:00:38.472213
-  2 | carpet       |   250 |       | ziad     | 2017-08-04 12:00:38.473347
-  3 | carton       |     2 |       | imad     | 2017-08-04 12:00:38.47544
-  4 | carbon fiber |    37 |       | imad     | 2017-08-04 12:00:38.476382
-  5 | caramel      |    14 |       | imad     | 2017-08-04 12:00:38.478394
-(5 rows)
-
-recruitment=> update product set dummy = 'dum' where id =2;
+recruitment=> update product set dummy = 'dum 8';
+-- cannot edit any records
 ERROR:  new row violates row-level security policy for table "product"
-recruitment=> update invoice set dummy = 'dum' where id =5;
+recruitment=> select * from invoice;
+-- can view table invoice
+ id | type | amount  | dummy | salesman | row_role |         created_at
+----+------+---------+-------+----------+----------+----------------------------
+  1 | out  | 3112197 |       | ziad     | jawad    | 2017-08-07 08:15:25.564469
+  2 | in   |  829997 |       | imad     | rawad    | 2017-08-07 08:15:25.566907
+  3 | in   |    3232 |       | imad     | man      | 2017-08-07 08:15:25.567861
+  4 | out  | 1101097 |       | ziad     | jawad    | 2017-08-07 08:15:25.569863
+  6 | out  |    4327 |       | ziad     | man      | 2017-08-07 08:15:25.57337
+  7 | in   | 1723297 |       | imad     | jawad    | 2017-08-07 08:15:25.574362
+  5 | out  |   99097 | dum 4 | ziad     | rawad    | 2017-08-07 08:15:25.571303
+(7 rows)
+
+recruitment=> update invoice set dummy = 'dum 9' where id = 1;
+-- cannot edit others records
 ERROR:  new row violates row-level security policy for table "invoice"
-recruitment=> update invoice set dummy = 'dum' where id =3;
+recruitment=> update invoice set dummy = 'dum 10' where id = 6;
+-- can edit own records
 UPDATE 1
-recruitment=> select * from invoice where id = 3;
- id | type | amount | dummy  | salesman | row_role |        created_at
-----+------+--------+--------+----------+----------+---------------------------
-  3 | in   |   3232 | dum    | imad     | man      | 2017-08-04 12:00:38.46422
-(1 row)
 
 ```
