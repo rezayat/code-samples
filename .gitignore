@@ -25,4 +25,5 @@ prest-react/TODOs.md
 # postgrest-rls
 postgrest-rls/testing_example.sql
 postgrest-rls/testing.sh
+postgrest-rls/rest/postgrest_local
 

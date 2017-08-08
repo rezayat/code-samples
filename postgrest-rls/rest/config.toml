@@ -1,0 +1,8 @@
+db-uri = "postgres://postgres:postgres@database:5432/recruitment"
+db-schema = "public"
+db-anon-role = "anon"
+db-pool = 10
+
+server-port = 3000
+jwt-secret = "not_secret_at_all"
+secret-is-base64 = false

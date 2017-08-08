@@ -8,7 +8,7 @@ create table public.product (
     price float default 0,
     dummy text default '',
     
-    row_role varchar(100) default current_role,
+    created_by varchar(100) default current_role,
     created_at timestamp default current_timestamp
 );
 
@@ -19,6 +19,6 @@ create table public.invoice (
     dummy text default '',
     
     salesman varchar(100),
-    row_role varchar(100) default current_role,
+    created_by varchar(100) default current_role,
     created_at timestamp default current_timestamp
 );

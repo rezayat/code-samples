@@ -36,8 +36,8 @@ alter table public.invoice enable row level security;
 drop policy if exists invoice_policy on public.invoice;
 
 create policy invoice_policy on public.invoice
-  using ((current_role = row_role) or (current_role = salesman) or pg_has_role('auditor','member') or pg_has_role('manager','member')) -- select
-  with check (current_role = row_role); -- delete update insert
+  using ((current_role = created_by) or (current_role = salesman) or pg_has_role('auditor','member') or pg_has_role('manager','member')) -- select
+  with check (current_role = created_by); -- delete update insert
 
 
 
@@ -46,5 +46,5 @@ alter table public.product enable row level security;
 drop policy if exists product_policy on public.product;
 
 create policy product_policy on public.product
-  using ((current_role = row_role) or pg_has_role('auditor','member') or pg_has_role('manager','member')) -- select
-  with check (current_role = row_role); -- delete update insert
+  using ((current_role = created_by) or pg_has_role('auditor','member') or pg_has_role('manager','member')) -- select
+  with check (current_role = created_by); -- delete update insert
