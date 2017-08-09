@@ -6,6 +6,7 @@ This is a folder full of example projects using react and django. These are open
 - [plain-react](https://testdriven.io): test driven development course adapted for plain django (none-rest)
 - prest-react: experimental react/prest stack with explicit JWT authentication as a proof of concept.
 - postgrest-react: experimental react/postgrest stack with role based authentication through JWT
+- postgrest-rls: experimental postgrest stack with hierarchical role based authentication through JWT and postgres row level security (database heavy configurations)
 
 # IMPORTANT: These don't Work
 
