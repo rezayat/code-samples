@@ -5,7 +5,7 @@ A proof of concept stack that demonstrates a **postgres database** with PERMISSI
 The stack is to be tested in this documentation using `curl` and `psql`.
 
 ## Project Directory Structure
-``` bash
+```bash
 .
 ├── database                     # database service
 │   ├── Dockerfile
@@ -25,6 +25,30 @@ The stack is to be tested in this documentation using `curl` and `psql`.
     ├── config.toml                 # postgrest configuration
     └── Dockerfile
 ```
+
+## Infrastructure
+
+### Defined in docker-compose.yml
+
+| Container | Port | Public Port | Links   
+| --------- | ---- | ----------- | --------
+| database  | 5432 | -           | -       
+| rest      | 3000 | -           | database
+| nginx     | 1234 | 1234        | rest    
+
+### Defined in nginx configuration
+
+In our example nginx is configured using file `./nginx/nginx.conf` to listen to `port 1234` and route calls as follows:
+
+| Source route | Proxy to               | Purpose
+| ----------   | ---------------------- | -------
+| :1234/api    | rest:3000/             | Expose postgrest
+| :1234/login  | rest:3000/rpc/login    | Expose postgrest login endpoint
+
+
+### Infrastructure Diagram
+
+![infrastructure diagram](./infrastructure.png)
 
 ## Database (database service)
 
@@ -168,30 +192,31 @@ $ docker-compose exec database psql -U postgres recruitment -c "\du;"
  ziad               | Cannot login                                               | {salesman}
 ```
 
-## Infrastructure
+#### Roles Hierarchy Tree
 
-### Defined in docker-compose.yml
+```YAML
+postgres
 
-| Container | Port | Public Port | Links   
-| --------- | ---- | ----------- | --------
-| database  | 5432 | -           | -       
-| rest      | 3000 | -           | database
-| nginx     | 1234 | 1234        | rest    
+anon:
+  authenticator
 
-### Defined in nginx configuration
+accountant:
+  rawad
+  jawad
 
-In our example nginx is configured using file `./nginx/nginx.conf` to listen to `port 1234` and route calls as follows:
+salesman:
+  imad
+  ziad
 
-| Source route | Proxy to               | Purpose
-| ----------   | ---------------------- | -------
-| :1234/api    | rest:3000/             | Expose postgrest
-| :1234/login  | rest:3000/rpc/login    | Expose postgrest login endpoint
+auditor:
+  accounting_auditor:
+    omar
+  sales_auditor:
+    joe
 
-
-### Infrastructure Diagram
-
-![infrastructure diagram](./infrastructure.png)
-
+manager:
+  man
+```
 
 ## How to run
 
@@ -431,9 +456,9 @@ UPDATE 1
 
 #### Testing Authentication
 
-Authentication in `postgrest` is simply done by sending a POST request with a username and a password in JSON data to `/login`. If the credentials are valid A `JWT token` is `postgrest` returns a `JWT authorization token` which would be sent along with any GET or POST request to `postgrest`.
+Authentication in postgrest is simply done by sending a POST request with a username and a password in JSON data to `/login`. If the credentials are valid postgrest returns a `JWT authorization token` which would be sent along with any GET or POST request to postgrest.
 
-Some **Failing** attempts to aquire a `JWT token` 
+Following are some **Failing** attempts to aquire a `JWT token` 
 
 Test attempt with invalid credentials using:
 ```bash
@@ -453,7 +478,7 @@ $ curl -X POST -H 'Content-Type: application/json' -d '{"pass":"missing_username
 {"hint":"No function matches the given name and argument types. You might need to add explicit type casts.","details":null,"code":"42883","message":"function public.login(pass => unknown) does not exist"}
 ```
 
-Test aquiring different `JWT token`s for defferent users (tokens are going to be used later)
+Following are some **Successful** attempts to aquire different `JWT token`s for defferent users
 
 **Note that:** tokens expire after some time. (You cannot use tokens from this documentation)
 
@@ -489,7 +514,7 @@ $ export man_jwt=$(curl -X POST -H 'Content-Type: application/json' -d '{"userna
 
 #### Test Authorization
 
-Testing `postgrest` rest api with/without valid `JWT tokens` to make sure Authorization, Permissions and Row Level Security measures are successfully implemented.
+Testing postgrest rest api with/without valid `JWT tokens` to make sure Authorization, Permissions and Row Level Security measures are successfully implemented.
 
 Test geting invoices without token using:
 ```bash
@@ -504,10 +529,11 @@ $ curl -H 'Authorization: Bearer some.invalid.token' http://localhost:1234/api/i
 ```
 
 Test getting `invoices` as user `omar` of role `accounting_auditor` using previously generated `JWT token`
+
 All invoice records must be returned
 
 ```bash
-$ curl -H 'Authorization: Bearer '$rawad_jwt http://localhost:1234/api/invoice
+$ curl -H 'Authorization: Bearer '$omar_jwt http://localhost:1234/api/invoice
 [
     {
         "amount": 3112197,
@@ -576,7 +602,8 @@ $ curl -H 'Authorization: Bearer '$rawad_jwt http://localhost:1234/api/invoice
 ```
 
 Test getting `invoices` as user `rawad` of role `accountant` using previously generated `JWT token`
-Only records having created_by = rawad must be returned
+
+Only records having `created_by = rawad` must be returned
 
 ```bash
 $ curl -H 'Authorization: Bearer '$rawad_jwt http://localhost:1234/api/invoice
@@ -603,7 +630,8 @@ $ curl -H 'Authorization: Bearer '$rawad_jwt http://localhost:1234/api/invoice
 ```
 
 Test getting `invoices` as user `imad` of role `accountant` using previously generated `JWT token`
-Only records having saleman = imad must be returned
+
+Only records having `saleman = imad` must be returned
 
 ```bash
 $ curl -H 'Authorization: Bearer '$imad_jwt http://localhost:1234/api/invoice
@@ -641,6 +669,7 @@ $ curl -H 'Authorization: Bearer '$imad_jwt http://localhost:1234/api/invoice
 ```
 
 Test posting an `invoice` as user `imad` which is a `salesman` using a valid `JWT token` for `imad`
+
 User imad must not be able to post into invoices
 
 ```bash
@@ -654,6 +683,7 @@ $ curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer '$i
 ```
 
 Test posting an `invoice` as user `rawad` which is an `accountant` using a valid `JWT token` for `rawad`
+
 User rawad must be able to post into invoices
 
 ```bash
@@ -663,7 +693,7 @@ $ curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer '$r
 Check record exists
 
 ```bash
-curl -H 'Authorization: Bearer '$rawad_jwt http://localhost:1234/api/invoice?dummy=eq."new_record"
+$ curl -H 'Authorization: Bearer '$rawad_jwt http://localhost:1234/api/invoice?dummy=eq."new_record"
 
 [
     {
