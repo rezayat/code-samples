@@ -8,9 +8,4 @@ This is a folder full of example projects using react and django. These are open
 - postgrest-react: experimental react/postgrest stack with role based authentication through JWT
 - postgrest-rls: experimental postgrest stack with hierarchical role based authentication through JWT and postgres row level security (database heavy configurations)
 
-# IMPORTANT: These don't Work
 
-The following don't work and are just here for demo purpose:
-
-- docker-react-redux-boilerplate
-- redux-in-docker

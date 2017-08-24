@@ -1,0 +1,8 @@
+db-uri = "postgres://sa:sa@db:5432/sa"
+db-schema = "public"
+db-anon-role = "anon"
+db-pool = 10
+
+server-port = 3000
+jwt-secret = "not_secret_at_all"
+secret-is-base64 = false
