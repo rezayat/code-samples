@@ -41,9 +41,22 @@ $ make
 
 3. Open browser from `public/index.html`
 
+- click on login button
+- click on invoice button
 
-3. testing
+note: the data is storred using local browser storage, so there may be a need to clear history and reopen browser to flush it.
+
+4. testing
+
+Can be done using shell scripts
 
 ```
 $ ./scripts/test.sh
 ```
+
+or using pytest
+
+```
+$ pytest
+```
+`
