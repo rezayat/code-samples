@@ -1,21 +1,49 @@
-# Postgrest + Elm
+# postgrest-elm
 
-- an incomplete demo of postgrest and elm together.
+An extension of an earlier proof-of-concept `postgrest-rls` which uses the elm language instead of the react framework.
 
-## References
+Note the url is hard-coded at present in:
 
-- elm in docker: https://hub.docker.com/r/codesimple/elm/
-- postgrest query builder in elm: https://github.com/john-kelly/elm-postgrest
+- src/Config.hs
+- scripts/test.sh
+- tests/test_jwt.py
+
+to 'http://172.16.149.136'. Obviously this should be changed
+
+## Installation
+
+If you are developing locally on ubuntu 16.04 LTS
+
+```
+$ ./scripts/install.sh
+```
+
+Build the docker stack
+
+```
+$ docker-compose build
+```
 
 ## Usage
 
+1. set up the stack
+
 ```
-$ docker-compose build elm
-$ source tools.sh
+$ docker-compose up -d
+```
 
-````
-will give you the `elm` command line
+2. build the elm app
 
-see elm in docker for examples of use
+```
+$ make clean
+$ make
+```
+
+3. Open browser from `public/index.html`
 
 
+3. testing
+
+```
+$ ./scripts/test.sh
+```

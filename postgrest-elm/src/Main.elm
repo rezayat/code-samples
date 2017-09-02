@@ -1,67 +1,17 @@
 module Main exposing (..)
 
+import Commands exposing (Msg(..))
 import Html
-import Http
-import PostgRest as PG
-import Resources
+import Models exposing (Model)
+import Update
+import Views.View as View
 
 
-type alias Session =
-    { id : Int
-    , location : String
-    , start_time : String
-    }
-
-
-sessionCmd =
-    PG.query Resources.session Session
-        |> PG.select .id
-        |> PG.select .location
-        |> PG.select .start_time
-        |> PG.filter [ .location |> PG.not PG.ilike "%russia%" ]
-        |> PG.order [ PG.asc .start_time ]
-        |> PG.list PG.noLimit "http://postgrest.herokuapp.com/"
-        |> Http.send Fetch
-
-
+main : Program (Maybe Model) Model Msg
 main =
-    Html.program
-        { init = ( { sessions = [] }, sessionCmd )
-        , update = update
-        , view = view
+    Html.programWithFlags
+        { init = Commands.init
+        , update = Update.update
         , subscriptions = \_ -> Sub.none
+        , view = View.view
         }
-
-
-
--- MODEL
-
-
-type alias Model =
-    { sessions : List Session
-    }
-
-
-
--- UPDATE
-
-
-type Msg
-    = Fetch (Result Http.Error (List Session))
-
-
-update msg model =
-    case msg of
-        Fetch (Ok sessions) ->
-            ( { model | sessions = sessions }, Cmd.none )
-
-        _ ->
-            ( model, Cmd.none )
-
-
-
--- VIEW
-
-
-view { sessions } =
-    toString sessions |> Html.text
