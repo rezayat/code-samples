@@ -1,11 +1,19 @@
-Django Rest Framework + React
-=============================
-Example code for the tutorial found at [geezhawk.github.io](http://geezhawk.github.io/using-react-with-django-rest-framework).
+# drf-react
 
-To try it yourself, clone the repo and run:
+Experimentation on sensible defaults for a dockerized DRF + React boilerplate.
 
-* `npm install`
-* `pip install -r requirements.txt`
-* `export DJANGO_SECRET_KEY='your-secret-key'`
-* `./node_modules/.bin/webpack --config webpack.config.js`
-* `python manage.py runserver`
+# Quickstart
+
+```shell
+$ docker-compose build
+$ docker-compose up -d
+
+$ docker-compose exec backend python /app/boiler/manage.py migrate
+```
+
+# URLs
+
+(Currently placeholders, no actual logic)
+
+- index => http://localhost/
+- api => https://localhost/api

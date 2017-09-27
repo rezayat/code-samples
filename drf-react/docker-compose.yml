@@ -1,0 +1,40 @@
+version: '2.1'
+
+services:
+    database:
+        image: postgres:alpine
+        expose:
+            - 5432
+
+    backend:
+        build: ./backend
+        volumes:
+            - ./backend:/app
+            - ./static:/app/boiler/static
+        expose:
+            - 8000
+        links:
+            - database
+
+        working_dir: /app/boiler/
+        command: gunicorn -w 4 --bind=0.0.0.0 boiler.wsgi
+
+    frontend:
+        build: ./frontend/
+        expose:
+            - 5000
+        links:
+            - backend
+        
+        command: serve -s build
+
+    webserver:
+        image: nginx:alpine
+        volumes:
+            - ./webserver/nginx.conf:/etc/nginx/nginx.conf:ro
+            - ./static:/app/boiler/static
+        ports:
+            - 80:80
+        links:
+            - backend
+            - frontend
