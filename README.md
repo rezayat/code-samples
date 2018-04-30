@@ -1,4 +1,8 @@
-# Frontend JS Demos
+# Code Samples
+
+Collection of code samples
+
+## Frontend JS Demos
 
 These are open source example projects using frontend frameworks and a mix of different backend solutions. These projects may or may not be modified from pre-existing examples on the web.
 
@@ -8,4 +12,3 @@ These are open source example projects using frontend frameworks and a mix of di
 - [postgrest-react](/postgrest-react): experimental react/postgrest stack with role based authentication through JWT
 - [postgrest-rls](/postgrest-rls): experimental postgrest stack with hierarchical role based authentication through JWT and postgres row level security (database heavy configurations)
 - [postgrest-elm](/postgrest-elm): experimental mix of postgrest and elm
-
